@@ -33,9 +33,14 @@ android {
 }
 
 dependencies {
+    implementation(project(":core-ui"))
+    implementation(project(":core-data"))
+    implementation(project(":core-data-network"))
     implementation(project(":core-designsystem"))
+    implementation(project(":feature-videos"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.koin.android)
 }

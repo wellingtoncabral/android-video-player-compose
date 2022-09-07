@@ -1,4 +1,4 @@
-package com.wcabral.videoplayercompose.ui.theme
+package com.wcabral.core.designsystem.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

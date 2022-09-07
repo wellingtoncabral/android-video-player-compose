@@ -15,7 +15,7 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
         with(target) {
             applyPlugins()
             configureAndroidCompose(extensions.getByType<BaseAppModuleExtension>())
-            dependenciesConfig()
+//            dependenciesConfig()
         }
     }
 

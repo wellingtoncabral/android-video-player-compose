@@ -1,6 +1,6 @@
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.wcabral.videoplayercompose.addImplementation
-import com.wcabral.videoplayercompose.configureAndroidApplication
+import com.wcabral.videoplayercompose.configureKotlinAndroid
 import com.wcabral.videoplayercompose.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,7 +13,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         with(target) {
             applyPlugins()
             androidConfig()
-            dependenciesConfig()
+//            dependenciesConfig()
         }
     }
 
@@ -26,7 +26,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
     private fun Project.androidConfig() {
         extensions.configure<BaseAppModuleExtension> {
-            configureAndroidApplication(this)
+            configureKotlinAndroid(this)
             defaultConfig.targetSdk = 32
         }
     }

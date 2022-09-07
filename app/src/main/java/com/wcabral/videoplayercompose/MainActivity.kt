@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 import com.wcabral.core.designsystem.theme.VideoPlayerComposeTheme
 import com.wcabral.feature.videos.videos.VideosScreen
 import com.wcabral.feature.videos.videos.VideosViewModel

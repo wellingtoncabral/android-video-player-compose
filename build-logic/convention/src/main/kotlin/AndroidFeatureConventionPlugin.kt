@@ -21,14 +21,16 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.featureConfig() {
-//        extensions.configure<LibraryExtension> {
-//            defaultConfig {
-//                testInstrumentationRunner =
-//                    "add instrumentation runner here"
-//            }
-//        }
-    }
+    /**
+     * Changes the feature configuration
+     * Example:
+     * extensions.configure<LibraryExtension> {
+     *     defaultConfig {
+     *         testInstrumentationRunner = "add instrumentation runner here"
+     *     }
+     * }
+     */
+    private fun Project.featureConfig() {}
 
     private fun Project.dependenciesConfig() {
         dependencies {

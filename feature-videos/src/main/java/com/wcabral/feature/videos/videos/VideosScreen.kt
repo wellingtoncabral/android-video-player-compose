@@ -1,19 +1,27 @@
 package com.wcabral.feature.videos.videos
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.wcabral.core.designsystem.component.DesignSystemHeader
+import com.wcabral.core.designsystem.component.DesignSystemLoading
+import com.wcabral.core.designsystem.component.DesignSystemTopAppBar
+import com.wcabral.core.designsystem.dimen.Dimens
+import com.wcabral.core.designsystem.icon.Icons
+import com.wcabral.core.designsystem.theme.VideoPlayerComposeTheme
 import com.wcabral.core.model.Game
 import com.wcabral.core.ui.SIDE_EFFECTS_KEY
 import com.wcabral.feature.videos.R
@@ -46,11 +54,20 @@ fun VideosScreen(
 
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { topBar() }
-    ) { contentPadding ->
-        Box(modifier = Modifier.padding(contentPadding)) {
+        topBar = {
+            DesignSystemTopAppBar(
+                titleRes = R.string.empty,
+                navigationIcon = ImageVector.vectorResource(id = Icons.ArrowBack),
+                navigationIconContentDescription = stringResource(id = R.string.back),
+                actionIcon = ImageVector.vectorResource(id = Icons.Search),
+                actionIconContentDescription = stringResource(id = R.string.search)
+            )
+        }
+    ) { _ ->
+        Column(modifier = Modifier.padding(horizontal = Dimens.ScreenPadding)) {
+            DesignSystemHeader(titleRes = R.string.recommended_for_you)
             when {
-                state.isLoading -> Text(text = "Loading")
+                state.isLoading -> DesignSystemLoading()
                 state.isError -> Text(text = "Error")
                 else -> {
                     state.videos.forEach {
@@ -62,23 +79,21 @@ fun VideosScreen(
     }
 }
 
-@Composable
-fun topBar() {
-    TopAppBar(title = { Text(text = "Videos") })
-}
-
-@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Preview("Dark mode", uiMode = UI_MODE_NIGHT_YES)
+@Preview("Light mode")
 @Composable
 fun DefaultPreview() {
-    val videos = List(3) { Game(it, "Game $it", backgroundImage = null) }
-    VideosScreen(
-        state = VideosContract.State(
-            videos = videos,
-            isLoading = false,
-            isError = false,
-        ),
-        effectFlow = null,
-        onEventSent = {},
-        onNavigationRequested = {},
-    )
+    VideoPlayerComposeTheme {
+        val videos = List(3) { Game(it, "Game $it", backgroundImage = null) }
+        VideosScreen(
+            state = VideosContract.State(
+                videos = videos,
+                isLoading = false,
+                isError = false,
+            ),
+            effectFlow = null,
+            onEventSent = {},
+            onNavigationRequested = {},
+        )
+    }
 }

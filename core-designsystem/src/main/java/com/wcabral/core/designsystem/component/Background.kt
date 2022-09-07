@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.wcabral.core.designsystem.theme.VideoPlayerComposeTheme
 
 @Composable
-fun VideoPlayerBackground(
+fun DesignSystemBackground(
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colors.background,
     content: @Composable () -> Unit,
@@ -27,8 +27,8 @@ fun VideoPlayerBackground(
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
-fun VideoPlayerBackgroundPreview() {
+fun DesignSystemBackgroundPreview() {
     VideoPlayerComposeTheme {
-        VideoPlayerBackground {}
+        DesignSystemBackground {}
     }
 }

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.wcabral.core.designsystem.theme.VideoPlayerComposeTheme
 
 @Composable
-fun VideoPlayerAppBar(
+fun DesignSystemTopAppBar(
     @StringRes titleRes: Int,
     navigationIcon: ImageVector,
     navigationIconContentDescription: String?,
@@ -40,6 +40,7 @@ fun VideoPlayerAppBar(
                 Icon(
                     imageVector = navigationIcon,
                     contentDescription = navigationIconContentDescription,
+                    tint = MaterialTheme.colors.onSurface,
                 )
             }
         },
@@ -48,6 +49,7 @@ fun VideoPlayerAppBar(
                 Icon(
                     imageVector = actionIcon,
                     contentDescription = actionIconContentDescription,
+                    tint = MaterialTheme.colors.onSurface,
                 )
             }
         },
@@ -60,9 +62,9 @@ fun VideoPlayerAppBar(
 @Preview("Top App Bar - Dark mode", uiMode = UI_MODE_NIGHT_YES)
 @Preview("Top App Bar - Light mode")
 @Composable
-fun NiaTopAppBarPreview() {
+fun DesignSystemTopAppBarPreview() {
     VideoPlayerComposeTheme {
-        VideoPlayerAppBar(
+        DesignSystemTopAppBar(
             titleRes = android.R.string.untitled,
             navigationIcon = Icons.Default.Search,
             navigationIconContentDescription = "Navigation icon",

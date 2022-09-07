@@ -4,4 +4,6 @@
     package="com.wcabral.core.data.network"
     >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

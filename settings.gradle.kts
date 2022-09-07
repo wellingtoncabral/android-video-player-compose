@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "VideoPlayerCompose"
 include(":app")
 include(":core-common")
+include(":core-model")

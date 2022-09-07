@@ -14,11 +14,13 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    api(libs.androidx.compose.ui)
-    api(libs.androidx.compose.material)
-    api(libs.androidx.compose.ui.tooling.preview)
-    debugApi(libs.androidx.compose.ui.tooling)
-    // TODO : Remove these dependency once we upgrade to Android Studio Dolphin b/228889042
-    // These dependencies are currently necessary to render Compose previews
+
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // Those dependencies are needed because it is a known bug: https://issuetracker.google.com/issues/227767363
     debugImplementation(libs.androidx.customview.poolingcontainer)
 }

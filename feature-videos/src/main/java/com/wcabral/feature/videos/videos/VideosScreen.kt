@@ -1,5 +1,6 @@
 package com.wcabral.feature.videos.videos
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -13,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.UiMode
 import com.wcabral.core.model.Game
 import com.wcabral.core.ui.SIDE_EFFECTS_KEY
 import com.wcabral.feature.videos.R
@@ -66,7 +68,7 @@ fun topBar() {
     TopAppBar(title = { Text(text = "Videos") })
 }
 
-@Preview(showBackground = true)
+@Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun DefaultPreview() {
     val videos = List(3) { Game(it, "Game $it", backgroundImage = null) }

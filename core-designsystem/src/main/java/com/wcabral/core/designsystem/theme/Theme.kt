@@ -7,15 +7,21 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
+    primary = Dark,
     primaryVariant = Purple700,
-    secondary = Teal200
+    secondary = Dark,
+    background = Dark,
+    surface = Dark,
+    onSurface = Light,
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
+    primary = Light,
     primaryVariant = Purple700,
-    secondary = Teal200
+    secondary = Light,
+    background = Light,
+    surface = Light,
+    onSurface = Dark,
 
     /* Other default colors to override
     background = Color.White,
@@ -28,7 +34,10 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun VideoPlayerComposeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun VideoPlayerComposeTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

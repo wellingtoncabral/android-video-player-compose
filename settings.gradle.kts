@@ -15,10 +15,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "VideoPlayerCompose"
 include(":app")
-include(":core-common")
-include(":core-model")
-include(":core-designsystem")
-include(":core-ui")
-include(":core-data")
-include(":core-data-network")
-include(":feature-videos")
+include(":core:common")
+include(":core:model")
+include(":core:designsystem")
+include(":core:ui")
+include(":core:data")
+include(":core:data-network")
+include(":feature:videos")

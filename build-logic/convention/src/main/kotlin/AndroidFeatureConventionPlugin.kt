@@ -34,11 +34,11 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
     private fun Project.dependenciesConfig() {
         dependencies {
-            addImplementation(project(":core-model"))
-            addImplementation(project(":core-ui"))
-            addImplementation(project(":core-designsystem"))
-            addImplementation(project(":core-data"))
-            addImplementation(project(":core-common"))
+            addImplementation(project(":core:model"))
+            addImplementation(project(":core:ui"))
+            addImplementation(project(":core:designsystem"))
+            addImplementation(project(":core:data"))
+            addImplementation(project(":core:common"))
 
             addImplementation(libs.findLibrary("androidx.core.ktx").get())
 

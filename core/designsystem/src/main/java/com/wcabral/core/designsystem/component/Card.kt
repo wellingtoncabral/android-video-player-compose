@@ -15,7 +15,7 @@ import com.wcabral.core.designsystem.theme.DesignSystemTheme
 
 @Composable
 fun DesignSystemCard(
-    backgroundColor: Color = MaterialTheme.colors.onBackground.copy(alpha = 0.02f),
+    backgroundColor: Color = MaterialTheme.colors.onBackground.copy(alpha = 0.05f),
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
     content: @Composable () -> Unit,

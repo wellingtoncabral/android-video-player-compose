@@ -1,4 +1,4 @@
-package com.wcabral.feature.videos.videos
+package com.wcabral.feature.videos
 
 import com.wcabral.core.model.Game
 import com.wcabral.core.ui.ViewEvent

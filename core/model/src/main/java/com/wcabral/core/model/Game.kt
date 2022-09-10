@@ -8,14 +8,16 @@ data class Game(
     val platforms: List<Platform> = emptyList(),
 )
 
+val previewGame = Game(
+    id = 1,
+    name = "Vampire: The Masquerade - Bloodlines 2",
+    backgroundImage = "https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg",
+    rating = 4.47f,
+    platforms = listOf(previewPlatformPC, previewPlatformLinux, previewPlatformXbox, previewPlatformNintendo)
+)
+
 val previewGames = listOf(
-    Game(
-        id = 1,
-        name = "Vampire: The Masquerade - Bloodlines 2",
-        backgroundImage = "https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg",
-        rating = 4.47f,
-        platforms = listOf(previewPlatformPC, previewPlatformLinux, previewPlatformXbox, previewPlatformNintendo)
-    ),
+    previewGame,
     Game(
         id = 33,
         name = "The Witcher 3: Wild Hunt",

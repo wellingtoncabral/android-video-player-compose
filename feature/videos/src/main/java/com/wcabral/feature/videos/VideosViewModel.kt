@@ -1,4 +1,4 @@
-package com.wcabral.feature.videos.videos
+package com.wcabral.feature.videos
 
 import androidx.lifecycle.viewModelScope
 import com.wcabral.core.common.Result

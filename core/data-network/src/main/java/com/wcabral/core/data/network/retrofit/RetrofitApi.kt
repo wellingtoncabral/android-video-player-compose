@@ -2,18 +2,22 @@ package com.wcabral.core.data.network.retrofit
 
 import com.wcabral.core.data.network.model.GetGameDetailsResponse
 import com.wcabral.core.data.network.model.GetAllGamesResponse
+import com.wcabral.core.data.network.model.GetAllStoresResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface RetrofitApi {
-
     @GET(Endpoints.GET_ALL_GAMES)
     suspend fun getAllGames(): GetAllGamesResponse
+
+    @GET(Endpoints.GET_ALL_STORES)
+    suspend fun getAllStores(): GetAllStoresResponse
 
     @GET(Endpoints.GET_GAME_DETAILS)
     suspend fun getGameDetails(
         @Path("id") gameId: Int
     ): GetGameDetailsResponse
+
 
 //    @GET("api/games/{id}/movies")
 //    suspend fun getGameVideos(

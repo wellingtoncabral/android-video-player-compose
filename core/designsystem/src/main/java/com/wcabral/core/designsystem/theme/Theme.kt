@@ -12,7 +12,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 private val DarkColorPalette = darkColors(
     primary = DesignSystemColors.Dark,
     primaryVariant = DesignSystemColors.Dark,
-    secondary = DesignSystemColors.Dark,
+    secondary = DesignSystemColors.Light,
     background = DesignSystemColors.Dark,
     surface = DesignSystemColors.Dark,
     onPrimary = DesignSystemColors.Light,
@@ -24,7 +24,7 @@ private val DarkColorPalette = darkColors(
 private val LightColorPalette = lightColors(
     primary = DesignSystemColors.Light,
     primaryVariant = DesignSystemColors.Light,
-    secondary = DesignSystemColors.Light,
+    secondary = DesignSystemColors.Dark,
     background = DesignSystemColors.Light,
     surface = DesignSystemColors.Light,
     onPrimary = DesignSystemColors.Dark,

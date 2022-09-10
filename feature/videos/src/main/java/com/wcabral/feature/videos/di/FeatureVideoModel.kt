@@ -6,6 +6,9 @@ import org.koin.dsl.module
 
 val featureVideoModelModule = module {
     viewModel {
-        VideosViewModel(get())
+        VideosViewModel(
+            gamesRepository =  get(),
+            storesRepository = get(),
+        )
     }
 }

@@ -1,12 +1,14 @@
 package com.wcabral.core.data.network.di
 
 import com.wcabral.core.data.network.BuildConfig
-import com.wcabral.core.data.network.GamesNetworkDataSource
+import com.wcabral.core.data.network.GamesDataSource
+import com.wcabral.core.data.network.StoresDataSource
 import com.wcabral.core.data.network.retrofit.ApiConstants
 import com.wcabral.core.data.network.retrofit.Endpoints
 import com.wcabral.core.data.network.retrofit.RetrofitApi
-import com.wcabral.core.data.network.retrofit.RetrofitDataSource
+import com.wcabral.core.data.network.retrofit.GamesDataSourceImpl
 import com.wcabral.core.data.network.retrofit.RetrofitInterceptor
+import com.wcabral.core.data.network.retrofit.StoresDataSourceImpl
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -59,5 +61,6 @@ val networkModule = module {
     }
 
     // Data sources
-    factory<GamesNetworkDataSource> { RetrofitDataSource(get()) }
+    factory<GamesDataSource> { GamesDataSourceImpl(get()) }
+    factory<StoresDataSource> { StoresDataSourceImpl(get()) }
 }

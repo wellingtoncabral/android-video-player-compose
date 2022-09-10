@@ -1,11 +1,11 @@
 package com.wcabral.core.data.network.retrofit
 
-import com.wcabral.core.data.network.GamesNetworkDataSource
+import com.wcabral.core.data.network.GamesDataSource
 import com.wcabral.core.data.network.model.GetAllGamesResponse
 
-class RetrofitDataSource(
+class GamesDataSourceImpl(
     private val retrofitApi: RetrofitApi
-) : GamesNetworkDataSource {
+) : GamesDataSource {
 
     override suspend fun getAllGames(): GetAllGamesResponse {
         return retrofitApi.getAllGames()

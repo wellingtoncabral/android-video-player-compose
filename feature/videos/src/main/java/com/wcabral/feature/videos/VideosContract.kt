@@ -1,6 +1,7 @@
 package com.wcabral.feature.videos
 
 import com.wcabral.core.model.Game
+import com.wcabral.core.model.Store
 import com.wcabral.core.ui.ViewEvent
 import com.wcabral.core.ui.ViewSideEffect
 import com.wcabral.core.ui.ViewState
@@ -15,6 +16,7 @@ class VideosContract {
 
     data class State(
         val videos: List<Game>,
+        val stores: List<Store>,
         val isLoading: Boolean,
         val isError: Boolean,
     ) : ViewState

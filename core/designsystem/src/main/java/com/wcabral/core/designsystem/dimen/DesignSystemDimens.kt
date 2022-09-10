@@ -12,4 +12,5 @@ object DesignSystemDimens {
 
     val ScreenPadding = Padding.Medium
     val VideoThumbnailHeight = 190.dp
+    val VideoThumbnailSmallHeight = 80.dp
 }

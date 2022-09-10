@@ -9,4 +9,5 @@
     <string name="generic_error_description">Something went wrong!</string>
     <string name="generic_error_button_title">Try it again</string>
     <string name="thumbnail_loading">...</string>
+    <string name="stores">Stores</string>
 </resources>

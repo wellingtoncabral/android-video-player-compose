@@ -5,4 +5,7 @@
     <string name="empty" />
     <string name="search">Search</string>
     <string name="recommended_for_you">Recommended for you</string>
+    <string name="generic_error_title">Oh No!</string>
+    <string name="generic_error_description">Something went wrong!</string>
+    <string name="generic_error_button_title">Try it again</string>
 </resources>

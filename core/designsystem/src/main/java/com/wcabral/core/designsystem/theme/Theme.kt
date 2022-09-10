@@ -10,40 +10,31 @@ import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
-    primary = Dark,
-    primaryVariant = Dark,
-    secondary = Dark,
-    background = Dark,
-    surface = Dark,
-    onPrimary = Light,
-    onSecondary = Light,
-    onBackground = Light,
-    onSurface = Light,
+    primary = DesignSystemColors.Dark,
+    primaryVariant = DesignSystemColors.Dark,
+    secondary = DesignSystemColors.Dark,
+    background = DesignSystemColors.Dark,
+    surface = DesignSystemColors.Dark,
+    onPrimary = DesignSystemColors.Light,
+    onSecondary = DesignSystemColors.Light,
+    onBackground = DesignSystemColors.Light,
+    onSurface = DesignSystemColors.Light,
 )
 
 private val LightColorPalette = lightColors(
-    primary = Light,
-    primaryVariant = Light,
-    secondary = Light,
-    background = Light,
-    surface = Light,
-    onPrimary = Dark,
-    onSecondary = Dark,
-    onBackground = Dark,
-    onSurface = Dark,
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    primary = DesignSystemColors.Light,
+    primaryVariant = DesignSystemColors.Light,
+    secondary = DesignSystemColors.Light,
+    background = DesignSystemColors.Light,
+    surface = DesignSystemColors.Light,
+    onPrimary = DesignSystemColors.Dark,
+    onSecondary = DesignSystemColors.Dark,
+    onBackground = DesignSystemColors.Dark,
+    onSurface = DesignSystemColors.Dark,
 )
 
 @Composable
-fun VideoPlayerComposeTheme(
+fun DesignSystemTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

@@ -18,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.wcabral.core.designsystem.theme.VideoPlayerComposeTheme
+import com.wcabral.core.designsystem.theme.DesignSystemTheme
 
 @Composable
 fun DesignSystemTopAppBar(
@@ -63,7 +63,7 @@ fun DesignSystemTopAppBar(
 @Preview("Top App Bar - Light mode")
 @Composable
 fun DesignSystemTopAppBarPreview() {
-    VideoPlayerComposeTheme {
+    DesignSystemTheme {
         DesignSystemTopAppBar(
             titleRes = android.R.string.untitled,
             navigationIcon = Icons.Default.Search,

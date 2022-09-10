@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.wcabral.core.designsystem.theme.VideoPlayerComposeTheme
+import com.wcabral.core.designsystem.theme.DesignSystemTheme
 import com.wcabral.feature.videos.videos.VideosScreen
 import com.wcabral.feature.videos.videos.VideosViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val viewModel = getViewModel<VideosViewModel>()
         setContent {
-            VideoPlayerComposeTheme {
+            DesignSystemTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
                     VideosScreen(

@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.wcabral.core.designsystem.theme.VideoPlayerComposeTheme
+import com.wcabral.core.designsystem.theme.DesignSystemTheme
 
 @Composable
 fun DesignSystemBackground(
@@ -28,7 +28,7 @@ fun DesignSystemBackground(
 @Preview(showBackground = true)
 @Composable
 fun DesignSystemBackgroundPreview() {
-    VideoPlayerComposeTheme {
+    DesignSystemTheme {
         DesignSystemBackground {}
     }
 }

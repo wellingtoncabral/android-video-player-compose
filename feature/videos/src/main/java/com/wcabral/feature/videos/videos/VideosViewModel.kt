@@ -14,7 +14,7 @@ class VideosViewModel(
     private val gamesRepository: GamesRepository
 ) : BaseViewModel<VideosContract.Event, VideosContract.State, VideosContract.Effect>() {
 
-    init { getGames() }
+    init { fetchGames() }
 
     override fun setInitialState() = VideosContract.State(
         videos = emptyList(),
@@ -25,10 +25,11 @@ class VideosViewModel(
     override fun handleEvents(event: VideosContract.Event) {
         when (event) {
             is VideosContract.Event.VideoSelection -> TODO()
+            is VideosContract.Event.Retry -> fetchGames()
         }
     }
 
-    private fun getGames() {
+    private fun fetchGames() {
         viewModelScope.launch {
             with(Dispatchers.IO) {
                 gamesRepository.getAllGames()
@@ -46,6 +47,4 @@ class VideosViewModel(
             }
         }
     }
-
-
 }

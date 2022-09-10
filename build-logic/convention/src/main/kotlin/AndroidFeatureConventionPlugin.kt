@@ -56,13 +56,14 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
             addImplementation(libs.findLibrary("koin.android").get())
 
+            addImplementation(libs.findLibrary("coil.compose").get())
+
 //            add("implementation", project(":core-navigation"))
 
 //            addTestImplementation(project(":core-testing"))
 //            addAndroidTestImplementation(project(":core-testing"))
 
 //            addImplementation(libs.findLibrary("coil.kt").get())
-//            addImplementation(libs.findLibrary("coil.kt.compose").get())
         }
     }
 }

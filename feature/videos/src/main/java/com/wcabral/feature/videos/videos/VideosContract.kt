@@ -8,6 +8,7 @@ import com.wcabral.core.ui.ViewState
 class VideosContract {
 
     sealed class Event : ViewEvent {
+        object Retry: Event()
         data class VideoSelection(val videoId: Int) : Event()
     }
 

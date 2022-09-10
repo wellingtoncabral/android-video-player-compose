@@ -8,5 +8,11 @@ import androidx.compose.ui.graphics.Color
 //val Teal200 = Color(0xFF03DAC5)
 
 // Theme
-val Light = Color(0xFFF7FAFF)
-val Dark = Color(0xFF091227)
+object DesignSystemColors {
+    private val Yellow800 = Color(0xFFF9A825)
+    val Black = Color.Black
+    val White = Color.White
+    val Light = Color(0xFFF7FAFF)
+    val Dark = Color(0xFF091227)
+    val Star = Yellow800
+}

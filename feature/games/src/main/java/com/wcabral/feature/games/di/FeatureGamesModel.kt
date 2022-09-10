@@ -1,12 +1,12 @@
-package com.wcabral.feature.videos.di
+package com.wcabral.feature.games.di
 
-import com.wcabral.feature.videos.VideosViewModel
+import com.wcabral.feature.games.GamesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val featureVideoModelModule = module {
+val featureGamesModelModule = module {
     viewModel {
-        VideosViewModel(
+        GamesViewModel(
             gamesRepository =  get(),
             storesRepository = get(),
         )

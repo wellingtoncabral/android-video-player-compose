@@ -38,7 +38,7 @@ dependencies {
     implementation(project(":core:data-network"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:navigation"))
-    implementation(project(":feature:videos"))
+    implementation(project(":feature:games"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

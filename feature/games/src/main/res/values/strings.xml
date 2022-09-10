@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="videos_screen_snackbar_loaded_message">Videos loaded</string>
+    <string name="games_screen_snackbar_loaded_message">Games loaded</string>
     <string name="back">Back</string>
     <string name="empty" />
     <string name="search">Search</string>

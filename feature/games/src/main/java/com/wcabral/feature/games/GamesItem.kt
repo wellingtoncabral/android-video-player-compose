@@ -1,7 +1,6 @@
-package com.wcabral.feature.videos
+package com.wcabral.feature.games
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,28 +36,27 @@ import com.wcabral.core.model.Game
 import com.wcabral.core.model.Platform
 import com.wcabral.core.model.PlatformType
 import com.wcabral.core.model.previewGame
-import com.wcabral.core.model.previewGames
 
 @Composable
-fun VideosItem(item: Game) {
+fun GamesItem(game: Game) {
     DesignSystemCard(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
         Column {
-            VideoItemHeader(item = item)
-            VideoItemDetails(item = item)
+            GamesItemHeader(game = game)
+            GamesItemDetails(game = game)
         }
     }
 }
 
 @Composable
-fun VideoItemHeader(item: Game) {
+fun GamesItemHeader(game: Game) {
     Box {
         SubcomposeAsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data(item.backgroundImage)
+                .data(game.backgroundImage)
                 .crossfade(true)
                 .build(),
             loading = {
@@ -67,9 +65,9 @@ fun VideoItemHeader(item: Game) {
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
-                .height(DesignSystemDimens.VideoThumbnailHeight)
+                .shadow(DesignSystemDimens.Shadow)
+                .height(190.dp)
                 .fillMaxWidth()
-                .shadow(16.dp)
         )
         DesignSystemRoundedIconButton(
             icon = DesignSystemIcons.PlayArrow,
@@ -83,7 +81,7 @@ fun VideoItemHeader(item: Game) {
 }
 
 @Composable
-fun VideoItemDetails(item: Game) {
+fun GamesItemDetails(game: Game) {
     Column(
         modifier = Modifier
             .padding(
@@ -93,17 +91,17 @@ fun VideoItemDetails(item: Game) {
                 bottom = DesignSystemDimens.Padding.Large
             )
     ) {
-        VideosPlatforms(item.platforms)
+        GamesItemPlatforms(game.platforms)
         Text(
-            text = item.name,
+            text = game.name,
             style = MaterialTheme.typography.h5,
         )
-        VideosRating(item.rating)
+        GamesItemRating(game.rating)
     }
 }
 
 @Composable
-fun VideosPlatforms(platforms: List<Platform>) {
+fun GamesItemPlatforms(platforms: List<Platform>) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -123,7 +121,7 @@ fun VideosPlatforms(platforms: List<Platform>) {
 }
 
 @Composable
-fun VideosRating(value: Float) {
+fun GamesItemRating(value: Float) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(top = DesignSystemDimens.Padding.ExtraSmall)
@@ -154,10 +152,10 @@ internal fun PlatformType.asDrawable() = when (this) {
 @Preview("night mode", uiMode = UI_MODE_NIGHT_YES)
 @Preview("light mode")
 @Composable
-fun VideosItemPreview() {
+fun GamesItemPreview() {
     DesignSystemTheme {
         DesignSystemBackground {
-            VideosItem(item = previewGame)
+            GamesItem(game = previewGame)
         }
     }
 }

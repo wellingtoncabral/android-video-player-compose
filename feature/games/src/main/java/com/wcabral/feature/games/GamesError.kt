@@ -1,4 +1,4 @@
-package com.wcabral.feature.videos
+package com.wcabral.feature.games
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Arrangement
@@ -15,9 +15,10 @@ import com.wcabral.core.designsystem.component.DesignSystemButton
 import com.wcabral.core.designsystem.component.DesignSystemHeader
 import com.wcabral.core.designsystem.dimen.DesignSystemDimens
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
+import com.wcabral.feature.games.R
 
 @Composable
-fun VideosError(
+fun GamesError(
     onRetryClick: () -> Unit
 ) {
     Column(
@@ -46,6 +47,6 @@ fun VideosError(
 @Composable
 fun VideosErrorPreview() {
     DesignSystemTheme {
-        VideosError{}
+        GamesError{}
     }
 }

@@ -1,4 +1,4 @@
-package com.wcabral.feature.videos
+package com.wcabral.feature.games
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.runtime.Composable
@@ -9,9 +9,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.wcabral.core.designsystem.component.DesignSystemTopAppBar
 import com.wcabral.core.designsystem.icon.DesignSystemIcons
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
+import com.wcabral.feature.games.R
 
 @Composable
-fun VideosToolbar(onNavigationClick: () -> Unit) {
+fun GamesToolbar(onNavigationClick: () -> Unit) {
     DesignSystemTopAppBar(
         titleRes = R.string.empty,
         navigationIcon = ImageVector.vectorResource(id = DesignSystemIcons.ArrowBack),
@@ -22,11 +23,11 @@ fun VideosToolbar(onNavigationClick: () -> Unit) {
     )
 }
 
-@Preview("dark mode", uiMode = UI_MODE_NIGHT_YES)
+@Preview("night mode", uiMode = UI_MODE_NIGHT_YES)
 @Preview("light mode", )
 @Composable
 fun VideosToolbarPreview() {
     DesignSystemTheme {
-        VideosToolbar{}
+        GamesToolbar{}
     }
 }

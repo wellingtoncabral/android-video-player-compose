@@ -1,4 +1,4 @@
-package com.wcabral.feature.videos
+package com.wcabral.feature.games
 
 import androidx.lifecycle.viewModelScope
 import com.wcabral.core.common.Result
@@ -12,26 +12,26 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class VideosViewModel(
+class GamesViewModel(
     private val gamesRepository: GamesRepository,
     private val storesRepository: StoresRepository,
-) : BaseViewModel<VideosContract.Event, VideosContract.State, VideosContract.Effect>() {
+) : BaseViewModel<GamesContract.Event, GamesContract.State, GamesContract.Effect>() {
 
     init { fetchData() }
 
-    override fun setInitialState() = VideosContract.State(
-        videos = emptyList(),
+    override fun setInitialState() = GamesContract.State(
+        games = emptyList(),
         stores = emptyList(),
         isLoading = false,
         isError = false,
     )
 
-    override fun handleEvents(event: VideosContract.Event) {
+    override fun handleEvents(event: GamesContract.Event) {
         when (event) {
-            is VideosContract.Event.VideoSelection -> TODO()
-            is VideosContract.Event.Retry -> fetchData()
-            is VideosContract.Event.BackButtonClicked -> setEffect {
-                VideosContract.Effect.Navigation.Back
+            is GamesContract.Event.VideoSelection -> TODO()
+            is GamesContract.Event.Retry -> fetchData()
+            is GamesContract.Event.BackButtonClicked -> setEffect {
+                GamesContract.Effect.Navigation.Back
             }
         }
     }
@@ -46,8 +46,8 @@ class VideosViewModel(
                             setState { copy(isLoading = true, isError = false) }
                         }
                         is Result.Success -> {
-                            setState { copy(isLoading = false, videos = result.data) }
-                            setEffect { VideosContract.Effect.DataWasLoaded }
+                            setState { copy(isLoading = false, games = result.data) }
+                            setEffect { GamesContract.Effect.DataWasLoaded }
                         }
                         is Result.Error -> {
                             // TODO: Handle the error cases
@@ -66,7 +66,7 @@ class VideosViewModel(
                 gamesRepository.getAllGames(),
                 storesRepository.getAllStores(),
             ) { games, stores ->
-                setState { copy(isLoading = false, isError = false, videos = games, stores = stores) }
+                setState { copy(isLoading = false, isError = false, games = games, stores = stores) }
             }.catch {
                 setState { copy(isLoading = false, isError = true) }
             }.collect()

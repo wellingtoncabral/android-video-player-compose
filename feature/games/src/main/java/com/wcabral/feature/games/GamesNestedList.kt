@@ -1,15 +1,12 @@
-package com.wcabral.feature.videos
+package com.wcabral.feature.games
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -24,7 +21,7 @@ import com.wcabral.core.model.previewGames
 import com.wcabral.core.model.previewStores
 
 @Composable
-fun VideosGameList(list: List<Game>, stores: List<Store>) {
+fun GamesNestedList(list: List<Game>, stores: List<Store>) {
     val state = rememberLazyGridState()
     val columns = when (LocalConfiguration.current.orientation) {
         Configuration.ORIENTATION_LANDSCAPE -> 2
@@ -39,23 +36,23 @@ fun VideosGameList(list: List<Game>, stores: List<Store>) {
         item {
             DesignSystemHeader(
                 titleRes = R.string.stores,
-                modifier = Modifier.padding(vertical = DesignSystemDimens.ScreenPadding)
+                modifier = Modifier.padding(vertical = DesignSystemDimens.Padding.ScreenVertical)
             )
         }
 
         item {
-            VideosStoreList(items = stores)
+            StoresList(items = stores)
         }
 
         item {
             DesignSystemHeader(
                 titleRes = R.string.recommended_for_you,
-                modifier = Modifier.padding(vertical = DesignSystemDimens.ScreenPadding)
+                modifier = Modifier.padding(vertical = DesignSystemDimens.Padding.ScreenVertical)
             )
         }
 
         items(list, key = { it.id }) { item ->
-            VideosItem(item = item)
+            GamesItem(game = item)
         }
     }
 }
@@ -69,6 +66,6 @@ fun VideosGameList(list: List<Game>, stores: List<Store>) {
 @Composable
 fun VideosGameListPreview() {
     DesignSystemTheme {
-        VideosGameList(list = previewGames, stores = previewStores)
+        GamesNestedList(list = previewGames, stores = previewStores)
     }
 }

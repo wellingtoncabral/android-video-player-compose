@@ -5,8 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.wcabral.core.navigation.NavigationDestination
-import com.wcabral.feature.videos.navigation.VideosDestination
-import com.wcabral.feature.videos.navigation.videosGraph
+import com.wcabral.feature.games.navigation.GamesDestination
+import com.wcabral.feature.games.navigation.gamesGraph
 
 @Composable
 fun AppNavHost(
@@ -14,14 +14,14 @@ fun AppNavHost(
     onNavigateToDestination: (NavigationDestination, String) -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    startDestination: String = VideosDestination.route
+    startDestination: String = GamesDestination.route
 ) {
     NavHost(
         navController = navController,
         startDestination = startDestination,
         modifier = modifier,
     ) {
-        videosGraph(onBackClick)
+        gamesGraph(onBackClick)
     }
 }
 

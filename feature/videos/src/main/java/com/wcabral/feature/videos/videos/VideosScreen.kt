@@ -57,13 +57,31 @@ import com.wcabral.feature.videos.R
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
+import org.koin.androidx.compose.getViewModel
+
+@Composable
+fun VideosRoute(
+    onBackClick: () -> Unit,
+) {
+    val viewModel = getViewModel<VideosViewModel>()
+    VideosScreen(
+        state = viewModel.viewState.value,
+        effectFlow = viewModel.effect,
+        onEventSent = { event ->  viewModel.setEvent(event) },
+        onNavigationRequested = { navigationEffect ->
+            if (navigationEffect is VideosContract.Effect.Navigation.Back) {
+                onBackClick()
+            }
+        },
+    )
+}
 
 @Composable
 fun VideosScreen(
     state: VideosContract.State,
     effectFlow: Flow<VideosContract.Effect>?,
     onEventSent: (event: VideosContract.Event) -> Unit,
-    onNavigationRequested: (navigationEffect: VideosContract.Effect.DataWasLoaded) -> Unit,
+    onNavigationRequested: (navigationEffect: VideosContract.Effect) -> Unit,
 ) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     val snackBarMessage = stringResource(R.string.videos_screen_snackbar_loaded_message)
@@ -77,13 +95,18 @@ fun VideosScreen(
                         duration = SnackbarDuration.Short
                     )
                 }
+                VideosContract.Effect.Navigation.Back -> {
+                    onNavigationRequested(VideosContract.Effect.Navigation.Back)
+                }
             }
         }?.collect()
     }
 
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { VideosToolbar() }
+        topBar = {
+            VideosToolbar(onNavigationClick = { onEventSent(VideosContract.Event.BackButtonClicked) })
+        }
     ) {
         Column(modifier = Modifier.padding(horizontal = DesignSystemDimens.ScreenPadding)) {
             when {
@@ -104,11 +127,12 @@ fun VideosScreen(
 }
 
 @Composable
-fun VideosToolbar() {
+fun VideosToolbar(onNavigationClick: () -> Unit) {
     DesignSystemTopAppBar(
         titleRes = R.string.empty,
         navigationIcon = ImageVector.vectorResource(id = DesignSystemIcons.ArrowBack),
         navigationIconContentDescription = stringResource(id = R.string.back),
+        onNavigationClick = onNavigationClick,
         actionIcon = ImageVector.vectorResource(id = DesignSystemIcons.Search),
         actionIconContentDescription = stringResource(id = R.string.search)
     )

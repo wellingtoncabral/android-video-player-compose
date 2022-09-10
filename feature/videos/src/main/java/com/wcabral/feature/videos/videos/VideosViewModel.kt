@@ -5,7 +5,6 @@ import com.wcabral.core.common.Result
 import com.wcabral.core.common.asResult
 import com.wcabral.core.data.repository.GamesRepository
 import com.wcabral.core.ui.BaseViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -26,25 +25,32 @@ class VideosViewModel(
         when (event) {
             is VideosContract.Event.VideoSelection -> TODO()
             is VideosContract.Event.Retry -> fetchGames()
+            is VideosContract.Event.BackButtonClicked -> setEffect {
+                VideosContract.Effect.Navigation.Back
+            }
         }
     }
 
     private fun fetchGames() {
         viewModelScope.launch {
-            with(Dispatchers.IO) {
-                gamesRepository.getAllGames()
-                    .asResult()
-                    .map { result ->
-                        when (result) {
-                            is Result.Loading -> setState { copy(isLoading = true, isError = false) }
-                            is Result.Success -> setState { copy(isLoading = false, videos = result.data) }
-                            is Result.Error -> {
-                                println("WELL: ${result.exception}")
-                                setState { copy(isLoading = false, isError = true) }
-                            }
+            gamesRepository.getAllGames()
+                .asResult()
+                .map { result ->
+                    when (result) {
+                        is Result.Loading -> {
+                            setState { copy(isLoading = true, isError = false) }
                         }
-                    }.collect()
-            }
+                        is Result.Success -> {
+                            setState { copy(isLoading = false, videos = result.data) }
+                            setEffect { VideosContract.Effect.DataWasLoaded }
+                        }
+                        is Result.Error -> {
+                            // TODO: Handle the error cases
+                            println("WELL: ${result.exception}")
+                            setState { copy(isLoading = false, isError = true) }
+                        }
+                    }
+                }.collect()
         }
     }
 }

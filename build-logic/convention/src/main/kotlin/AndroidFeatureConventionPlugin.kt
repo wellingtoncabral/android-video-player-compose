@@ -39,6 +39,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             addImplementation(project(":core:designsystem"))
             addImplementation(project(":core:data"))
             addImplementation(project(":core:common"))
+            addImplementation(project(":core:navigation"))
 
             addImplementation(libs.findLibrary("androidx.core.ktx").get())
 
@@ -55,15 +56,9 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             addImplementation(libs.findLibrary("kotlinx.coroutines.android").get())
 
             addImplementation(libs.findLibrary("koin.android").get())
+            addImplementation(libs.findLibrary("koin.androidx.compose").get())
 
             addImplementation(libs.findLibrary("coil.compose").get())
-
-//            add("implementation", project(":core-navigation"))
-
-//            addTestImplementation(project(":core-testing"))
-//            addAndroidTestImplementation(project(":core-testing"))
-
-//            addImplementation(libs.findLibrary("coil.kt").get())
         }
     }
 }

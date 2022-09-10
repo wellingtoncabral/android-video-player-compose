@@ -9,6 +9,7 @@ class VideosContract {
 
     sealed class Event : ViewEvent {
         object Retry: Event()
+        object BackButtonClicked: Event()
         data class VideoSelection(val videoId: Int) : Event()
     }
 
@@ -20,5 +21,9 @@ class VideosContract {
 
     sealed class Effect : ViewSideEffect {
         object DataWasLoaded : Effect()
+
+        sealed class Navigation: Effect() {
+            object Back : Navigation()
+        }
     }
 }

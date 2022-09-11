@@ -2,6 +2,7 @@ package com.wcabral.core.data.network.retrofit
 
 import com.wcabral.core.data.network.model.GetGameDetailsResponse
 import com.wcabral.core.data.network.model.GetAllGamesResponse
+import com.wcabral.core.data.network.model.GetAllMoviesByGameIdResponse
 import com.wcabral.core.data.network.model.GetAllStoresResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -9,6 +10,9 @@ import retrofit2.http.Path
 interface RetrofitApi {
     @GET(Endpoints.GET_ALL_GAMES)
     suspend fun getAllGames(): GetAllGamesResponse
+
+    @GET(Endpoints.GET_ALL_MOVIES_BY_GAMES_ID)
+    suspend fun getAllMovies(@Path("id") gameId: Int): GetAllMoviesByGameIdResponse
 
     @GET(Endpoints.GET_ALL_STORES)
     suspend fun getAllStores(): GetAllStoresResponse

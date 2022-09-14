@@ -11,7 +11,7 @@ class GamesContract {
     sealed class Event : ViewEvent {
         object Retry: Event()
         object BackButtonClicked: Event()
-        data class VideoSelection(val videoId: Int) : Event()
+        data class GameSelection(val gameId: Int) : Event()
     }
 
     data class State(
@@ -26,6 +26,7 @@ class GamesContract {
 
         sealed class Navigation: Effect() {
             object Back : Navigation()
+            data class ToGameVideos(val gameId: Int): Navigation()
         }
     }
 }

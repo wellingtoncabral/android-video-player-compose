@@ -19,9 +19,12 @@ kotlinxCoroutines = "1.6.2"
 retrofit = "2.9.0"
 okhttpLoggingInterceptor = "4.9.3"
 coilCompose = "2.2.1"
+androidxMedia3 = "1.0.0-beta02"
 
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "androidxMedia3" }
+androidx-media3-ui = { module = "androidx.media3:media3-ui", version.ref = "androidxMedia3" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidLifecycle" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "androidxCompose" }

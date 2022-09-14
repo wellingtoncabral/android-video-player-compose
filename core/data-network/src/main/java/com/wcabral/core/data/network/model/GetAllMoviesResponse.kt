@@ -1,9 +1,8 @@
 package com.wcabral.core.data.network.model
 
 import com.google.gson.annotations.SerializedName
-import com.wcabral.core.model.Platform
 
-data class GetAllMoviesByGameIdResponse(
+data class GetAllMoviesResponse(
     @SerializedName("results")
     val results: List<MovieResultsResponse>,
 )

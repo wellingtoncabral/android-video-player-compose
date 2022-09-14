@@ -21,7 +21,11 @@ import com.wcabral.core.model.previewGames
 import com.wcabral.core.model.previewStores
 
 @Composable
-fun GamesNestedList(list: List<Game>, stores: List<Store>) {
+fun GamesNestedList(
+    list: List<Game>,
+    stores: List<Store>,
+    onGameClick: (Game) -> Unit,
+) {
     val state = rememberLazyGridState()
     val columns = when (LocalConfiguration.current.orientation) {
         Configuration.ORIENTATION_LANDSCAPE -> 2
@@ -52,7 +56,7 @@ fun GamesNestedList(list: List<Game>, stores: List<Store>) {
         }
 
         items(list, key = { it.id }) { item ->
-            GamesItem(game = item)
+            GamesItem(game = item, onClick = { onGameClick(it) })
         }
     }
 }
@@ -66,6 +70,10 @@ fun GamesNestedList(list: List<Game>, stores: List<Store>) {
 @Composable
 fun VideosGameListPreview() {
     DesignSystemTheme {
-        GamesNestedList(list = previewGames, stores = previewStores)
+        GamesNestedList(
+            list = previewGames,
+            stores = previewStores,
+            onGameClick = {},
+        )
     }
 }

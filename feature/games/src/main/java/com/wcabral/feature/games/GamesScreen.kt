@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.wcabral.core.designsystem.component.DesignSystemLoading
+import com.wcabral.core.designsystem.component.ErrorPage
 import com.wcabral.core.designsystem.dimen.DesignSystemDimens
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
 import com.wcabral.core.model.previewGames
@@ -26,6 +27,7 @@ import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun GamesRoute(
+    navigateToGameVideos: (Int) -> Unit,
     onBackClick: () -> Unit,
 ) {
     val viewModel = getViewModel<GamesViewModel>()
@@ -34,8 +36,9 @@ fun GamesRoute(
         effectFlow = viewModel.effect,
         onEventSent = { event ->  viewModel.setEvent(event) },
         onNavigationRequested = { navigationEffect ->
-            if (navigationEffect is GamesContract.Effect.Navigation.Back) {
-                onBackClick()
+            when (navigationEffect) {
+                is GamesContract.Effect.Navigation.Back -> onBackClick()
+                is GamesContract.Effect.Navigation.ToGameVideos -> navigateToGameVideos(navigationEffect.gameId)
             }
         },
     )
@@ -46,7 +49,7 @@ fun GamesScreen(
     state: GamesContract.State,
     effectFlow: Flow<GamesContract.Effect>?,
     onEventSent: (event: GamesContract.Event) -> Unit,
-    onNavigationRequested: (navigationEffect: GamesContract.Effect) -> Unit,
+    onNavigationRequested: (navigationEffect: GamesContract.Effect.Navigation) -> Unit,
 ) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     val snackBarMessage = stringResource(R.string.games_screen_snackbar_loaded_message)
@@ -54,14 +57,17 @@ fun GamesScreen(
     LaunchedEffect(SIDE_EFFECTS_KEY) {
         effectFlow?.onEach { effect ->
             when (effect) {
-                GamesContract.Effect.DataWasLoaded -> {
+                is GamesContract.Effect.DataWasLoaded -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = snackBarMessage,
                         duration = SnackbarDuration.Short
                     )
                 }
-                GamesContract.Effect.Navigation.Back -> {
+                is GamesContract.Effect.Navigation.Back -> {
                     onNavigationRequested(GamesContract.Effect.Navigation.Back)
+                }
+                is GamesContract.Effect.Navigation.ToGameVideos -> {
+                    onNavigationRequested(GamesContract.Effect.Navigation.ToGameVideos(effect.gameId))
                 }
             }
         }?.collect()
@@ -76,8 +82,18 @@ fun GamesScreen(
         Column(modifier = Modifier.padding(horizontal = DesignSystemDimens.Padding.ScreenHorizontal)) {
             when {
                 state.isLoading -> DesignSystemLoading()
-                state.isError -> GamesError(onRetryClick = { onEventSent(GamesContract.Event.Retry) })
-                else -> GamesNestedList(list = state.games, stores = state.stores)
+                state.isError -> ErrorPage(
+                    titleRes = R.string.generic_error_title,
+                    descriptionRes = R.string.generic_error_description,
+                    buttonTitleRes = R.string.generic_error_button_title,
+                ) {
+                    onEventSent(GamesContract.Event.Retry)
+                }
+                else -> GamesNestedList(
+                    list = state.games,
+                    stores = state.stores,
+                    onGameClick = { game -> onEventSent(GamesContract.Event.GameSelection(game.id)) }
+                )
             }
         }
     }

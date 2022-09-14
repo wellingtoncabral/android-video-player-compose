@@ -14,14 +14,26 @@ fun DesignSystemHeader(
     @StringRes titleRes: Int,
     modifier: Modifier = Modifier,
 ) {
+    DesignSystemHeader(
+        title = stringResource(id = titleRes),
+        modifier = modifier
+    )
+}
+
+@Composable
+fun DesignSystemHeader(
+    title: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
-        text = stringResource(id = titleRes),
+        text = title,
         style = MaterialTheme.typography.h5.copy(
             fontWeight = FontWeight.Bold
         ),
         modifier = modifier
     )
 }
+
 
 @Preview
 @Composable

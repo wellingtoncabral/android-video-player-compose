@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="game_videos_top_bar_title">Videos</string>
+    <string name="back">Back</string>
+    <string name="search">Search</string>
+    <string name="generic_error_title">Oh No!</string>
+    <string name="generic_error_description">Something went wrong!</string>
+    <string name="generic_error_button_title">Try it again</string>
+    <string name="trailers">Trailers (%d)</string>
+</resources>

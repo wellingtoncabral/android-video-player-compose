@@ -1,6 +1,6 @@
-package com.wcabral.feature.games
+package com.wcabral.core.designsystem.component
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,14 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.wcabral.core.designsystem.component.DesignSystemButton
-import com.wcabral.core.designsystem.component.DesignSystemHeader
 import com.wcabral.core.designsystem.dimen.DesignSystemDimens
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
-import com.wcabral.feature.games.R
 
 @Composable
-fun GamesError(
+fun ErrorPage(
+    titleRes: Int,
+    descriptionRes: Int,
+    buttonTitleRes: Int,
     onRetryClick: () -> Unit
 ) {
     Column(
@@ -27,26 +27,30 @@ fun GamesError(
         modifier = Modifier.fillMaxSize()
     ) {
         DesignSystemHeader(
-            titleRes = R.string.generic_error_title,
+            titleRes = titleRes
         )
         Text(
-            text = stringResource(id = R.string.generic_error_description),
+            text = stringResource(id = descriptionRes),
             modifier = Modifier.padding(DesignSystemDimens.Padding.ExtraSmall)
         )
         DesignSystemButton(
             modifier = Modifier.padding(DesignSystemDimens.Padding.Large),
             onClick = onRetryClick,
         ) {
-            Text(text = stringResource(id = R.string.generic_error_button_title))
+            Text(text = stringResource(id = buttonTitleRes))
         }
     }
 }
 
-@Preview("night mode", uiMode = UI_MODE_NIGHT_YES)
+@Preview("night mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview("light mode")
 @Composable
-fun VideosErrorPreview() {
+fun ErrorPagePreview() {
     DesignSystemTheme {
-        GamesError{}
+        ErrorPage(
+            titleRes = android.R.string.untitled,
+            descriptionRes = android.R.string.untitled,
+            buttonTitleRes = android.R.string.untitled
+        ){}
     }
 }

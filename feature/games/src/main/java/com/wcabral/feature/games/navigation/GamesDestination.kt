@@ -11,9 +11,13 @@ object GamesDestination : NavigationDestination {
 }
 
 fun NavGraphBuilder.gamesGraph(
+    navigateToGameVideos: (Int) -> Unit,
     onBackClick: () -> Unit,
 ) {
     composable(route = GamesDestination.route) {
-        GamesRoute(onBackClick = onBackClick)
+        GamesRoute(
+            navigateToGameVideos = navigateToGameVideos,
+            onBackClick = onBackClick
+        )
     }
 }

@@ -25,11 +25,17 @@ class GamesViewModel(
 
     override fun handleEvents(event: GamesContract.Event) {
         when (event) {
-            is GamesContract.Event.VideoSelection -> TODO()
-            is GamesContract.Event.Retry -> fetchData()
-            is GamesContract.Event.BackButtonClicked -> setEffect {
-                GamesContract.Effect.Navigation.Back
+            is GamesContract.Event.GameSelection -> {
+                setEffect {
+                    GamesContract.Effect.Navigation.ToGameVideos(event.gameId)
+                }
             }
+            is GamesContract.Event.BackButtonClicked -> {
+                setEffect {
+                    GamesContract.Effect.Navigation.Back
+                }
+            }
+            is GamesContract.Event.Retry -> fetchData()
         }
     }
 
@@ -47,28 +53,4 @@ class GamesViewModel(
             }.collect()
         }
     }
-
-    //    private fun fetchGames() {
-//        viewModelScope.launch {
-//            gamesRepository.getAllGames()
-//                .asResult()
-//                .map { result ->
-//                    when (result) {
-//                        is Result.Loading -> {
-//                            setState { copy(isLoading = true, isError = false) }
-//                        }
-//                        is Result.Success -> {
-//                            setState { copy(isLoading = false, games = result.data) }
-//                            setEffect { GamesContract.Effect.DataWasLoaded }
-//                        }
-//                        is Result.Error -> {
-//                            // TODO: Handle the error cases
-//                            println("WELL: ${result.exception}")
-//                            setState { copy(isLoading = false, isError = true) }
-//                        }
-//                    }
-//                }.collect()
-//        }
-//    }
-
 }

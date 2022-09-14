@@ -38,8 +38,12 @@ import com.wcabral.core.model.PlatformType
 import com.wcabral.core.model.previewGame
 
 @Composable
-fun GamesItem(game: Game) {
+fun GamesItem(
+    game: Game,
+    onClick: (Game) -> Unit,
+) {
     DesignSystemCard(
+        onClick = { onClick(game) },
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
@@ -155,7 +159,10 @@ internal fun PlatformType.asDrawable() = when (this) {
 fun GamesItemPreview() {
     DesignSystemTheme {
         DesignSystemBackground {
-            GamesItem(game = previewGame)
+            GamesItem(
+                game = previewGame,
+                onClick = {},
+            )
         }
     }
 }

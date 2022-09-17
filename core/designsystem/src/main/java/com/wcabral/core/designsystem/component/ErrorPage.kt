@@ -33,7 +33,7 @@ fun ErrorPage(
             text = stringResource(id = descriptionRes),
             modifier = Modifier.padding(DesignSystemDimens.Padding.ExtraSmall)
         )
-        DesignSystemButton(
+        DesignSystemPrimaryButton(
             modifier = Modifier.padding(DesignSystemDimens.Padding.Large),
             onClick = onRetryClick,
         ) {

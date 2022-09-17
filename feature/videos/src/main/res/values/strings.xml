@@ -7,4 +7,5 @@
     <string name="generic_error_description">Something went wrong!</string>
     <string name="generic_error_button_title">Try it again</string>
     <string name="trailers">Trailers (%d)</string>
+    <string name="no_items_available">No items available</string>
 </resources>

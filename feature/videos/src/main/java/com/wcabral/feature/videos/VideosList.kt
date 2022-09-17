@@ -1,6 +1,5 @@
 package com.wcabral.feature.videos
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,14 +15,11 @@ fun VideosList(
     currentMediaId: String?,
     videos: List<Video>
 ) {
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(DesignSystemDimens.Padding.Medium),
-        modifier = Modifier.padding(horizontal = DesignSystemDimens.Padding.ScreenHorizontal)
-    ) {
+    LazyColumn {
 
         item {
             DesignSystemHeader(
-                modifier = Modifier.padding(top = DesignSystemDimens.Padding.Medium),
+                modifier = Modifier.padding(DesignSystemDimens.Padding.ScreenAll),
                 title = stringResource(id = R.string.trailers, formatArgs = arrayOf(videos.size)),
             )
         }

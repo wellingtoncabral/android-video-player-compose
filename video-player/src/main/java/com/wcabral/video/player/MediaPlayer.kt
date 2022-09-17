@@ -1,6 +1,5 @@
 package com.wcabral.video.player
 
-import android.net.Uri
 import androidx.media3.common.Player
 import com.wcabral.video.player.model.Media
 

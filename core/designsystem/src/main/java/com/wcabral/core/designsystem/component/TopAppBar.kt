@@ -15,9 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.wcabral.core.designsystem.theme.DesignSystemColors
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
 
 @Composable
@@ -34,13 +36,18 @@ fun DesignSystemTopAppBar(
     onActionClick: () -> Unit = {}
 ) {
     TopAppBar(
-        title = { Text(text = stringResource(id = titleRes)) },
+        title = {
+            Text(
+                text = stringResource(id = titleRes),
+                style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.ExtraBold),
+            )
+        },
         navigationIcon = {
             IconButton(onClick = onNavigationClick) {
                 Icon(
                     imageVector = navigationIcon,
                     contentDescription = navigationIconContentDescription,
-                    tint = MaterialTheme.colors.onSurface,
+                    tint = DesignSystemColors.Accent,
                 )
             }
         },
@@ -49,7 +56,7 @@ fun DesignSystemTopAppBar(
                 Icon(
                     imageVector = actionIcon,
                     contentDescription = actionIconContentDescription,
-                    tint = MaterialTheme.colors.onSurface,
+                    tint = DesignSystemColors.Accent,
                 )
             }
         },
@@ -59,8 +66,8 @@ fun DesignSystemTopAppBar(
     )
 }
 
-@Preview("Top App Bar - Dark mode", uiMode = UI_MODE_NIGHT_YES)
-@Preview("Top App Bar - Light mode")
+@Preview("night mode", uiMode = UI_MODE_NIGHT_YES)
+@Preview("light mode")
 @Composable
 fun DesignSystemTopAppBarPreview() {
     DesignSystemTheme {

@@ -9,13 +9,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.wcabral.core.designsystem.component.DesignSystemTopAppBar
 import com.wcabral.core.designsystem.icon.DesignSystemIcons
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
-import com.wcabral.feature.games.R
 
 @Composable
 fun GamesToolbar(onNavigationClick: () -> Unit) {
     DesignSystemTopAppBar(
-        titleRes = R.string.empty,
-        navigationIcon = ImageVector.vectorResource(id = DesignSystemIcons.ArrowBack),
+        titleRes = R.string.app_name,
+        navigationIcon = DesignSystemIcons.AppIcon,
         navigationIconContentDescription = stringResource(id = R.string.back),
         onNavigationClick = onNavigationClick,
         actionIcon = ImageVector.vectorResource(id = DesignSystemIcons.Search),

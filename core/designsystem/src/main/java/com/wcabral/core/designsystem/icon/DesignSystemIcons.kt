@@ -3,6 +3,7 @@ package com.wcabral.core.designsystem.icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.PlayArrow
 import com.wcabral.core.designsystem.R
 
 object DesignSystemIcons {
@@ -16,4 +17,5 @@ object DesignSystemIcons {
     val PlatformNintendo = R.drawable.ic_platform_nitendo
     val Star = Icons.Default.Star
     val PlayArrow = Icons.Filled.PlayArrow
+    val AppIcon = Icons.Outlined.PlayArrow
 }

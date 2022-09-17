@@ -1,8 +1,10 @@
 package com.wcabral.feature.videos
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.wcabral.core.designsystem.component.DesignSystemLoading
@@ -53,7 +55,7 @@ fun VideosScreen(
     }
 
     when {
-        state.isLoading -> DesignSystemLoading()
+        state.isLoading -> DesignSystemLoading(modifier = Modifier.fillMaxSize())
         state.isError -> ErrorPage(
             titleRes = R.string.generic_error_title,
             descriptionRes = R.string.generic_error_description,
@@ -63,7 +65,8 @@ fun VideosScreen(
         else -> VideosView(
             mediaPlayer = state.mediaPlayer,
             currentMediaId = state.currentMediaId,
-            videos = state.videos
+            videos = state.videos,
+            onBackClick = { onEventSent(VideosContract.Event.BackButtonClicked) }
         )
     }
 }

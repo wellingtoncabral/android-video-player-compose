@@ -2,8 +2,10 @@ package com.wcabral.feature.games
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -12,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import com.wcabral.core.designsystem.component.DesignSystemBackground
 import com.wcabral.core.designsystem.component.DesignSystemHeader
 import com.wcabral.core.designsystem.dimen.DesignSystemDimens
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
@@ -37,18 +40,18 @@ fun GamesNestedList(
         verticalArrangement = Arrangement.spacedBy(DesignSystemDimens.Padding.Medium),
         horizontalArrangement = Arrangement.spacedBy(DesignSystemDimens.Padding.Small),
     ) {
-        item {
+        item(span = { GridItemSpan(columns) }) {
             DesignSystemHeader(
                 titleRes = R.string.stores,
                 modifier = Modifier.padding(vertical = DesignSystemDimens.Padding.ScreenVertical)
             )
         }
 
-        item {
+        item(span = { GridItemSpan(columns) }) {
             StoresList(items = stores)
         }
 
-        item {
+        item(span = { GridItemSpan(columns) }) {
             DesignSystemHeader(
                 titleRes = R.string.recommended_for_you,
                 modifier = Modifier.padding(vertical = DesignSystemDimens.Padding.ScreenVertical)
@@ -61,19 +64,23 @@ fun GamesNestedList(
     }
 }
 
-@Preview(name = "phone", device = Devices.PHONE, showBackground = true)
-@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480", showBackground = true)
-@Preview(name = "foldable", device = Devices.FOLDABLE, showBackground = true)
-@Preview(name = "tablet", device = Devices.TABLET, showBackground = true)
-@Preview("light mode", showBackground = true)
-@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Preview(name = "phone", device = Devices.PHONE)
+@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480")
+@Preview(name = "foldable", device = Devices.FOLDABLE)
+@Preview(name = "tablet", device = Devices.TABLET)
+@Preview("light mode")
+@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun VideosGameListPreview() {
     DesignSystemTheme {
-        GamesNestedList(
-            list = previewGames,
-            stores = previewStores,
-            onGameClick = {},
-        )
+        DesignSystemBackground {
+            Box(modifier = Modifier.padding(DesignSystemDimens.Padding.ScreenAll)) {
+                GamesNestedList(
+                    list = previewGames,
+                    stores = previewStores,
+                    onGameClick = {},
+                )
+            }
+        }
     }
 }

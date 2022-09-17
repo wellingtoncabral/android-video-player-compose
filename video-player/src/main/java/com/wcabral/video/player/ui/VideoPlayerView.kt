@@ -2,6 +2,7 @@ package com.wcabral.video.player.ui
 
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.MaterialTheme
@@ -19,9 +20,18 @@ fun VideoPlayerView(
     mediaPlayer: MediaPlayer?,
     modifier: Modifier = Modifier,
     userController: Boolean = true,
+    isFullScreen: Boolean = false,
     resizeMode: Int = AspectRatioFrameLayout.RESIZE_MODE_FILL,
+    onNavigateBack: (() -> Unit)? = null,
 ) {
     val context = LocalContext.current
+
+    BackHandler {
+        if (!isFullScreen) {
+            onNavigateBack?.invoke()
+        }
+    }
+
     Box(
         modifier = modifier
             .background(MaterialTheme.colors.background)

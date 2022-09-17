@@ -2,6 +2,7 @@ package com.wcabral.feature.games
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
@@ -81,7 +82,7 @@ fun GamesScreen(
     ) {
         Column(modifier = Modifier.padding(horizontal = DesignSystemDimens.Padding.ScreenHorizontal)) {
             when {
-                state.isLoading -> DesignSystemLoading()
+                state.isLoading -> DesignSystemLoading(modifier = Modifier.fillMaxSize())
                 state.isError -> ErrorPage(
                     titleRes = R.string.generic_error_title,
                     descriptionRes = R.string.generic_error_description,

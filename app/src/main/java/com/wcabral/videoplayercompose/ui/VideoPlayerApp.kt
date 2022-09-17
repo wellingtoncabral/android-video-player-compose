@@ -1,5 +1,6 @@
 package com.wcabral.videoplayercompose.ui
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.wcabral.core.designsystem.component.DesignSystemBackground
@@ -11,7 +12,7 @@ fun VideoPlayerApp(
     appState: VideoPlayerAppState = rememberVideoPlayerAppState()
 ) {
     DesignSystemTheme {
-        DesignSystemBackground {
+        DesignSystemBackground(modifier = Modifier.fillMaxSize()) {
             AppNavHost(
                 navController = appState.navController,
                 onNavigateToDestination = appState::navigate,

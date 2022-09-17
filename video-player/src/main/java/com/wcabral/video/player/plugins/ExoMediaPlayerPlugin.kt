@@ -23,6 +23,7 @@ internal class ExoMediaPlayerPlugin(
     private val defaultDataSourceFactory = DefaultDataSource.Factory(context)
     private val dataSourceFactory: DataSource.Factory = DefaultDataSource.Factory(context, defaultDataSourceFactory)
 
+
     private val playerListener = object : Player.Listener {
         override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
             super.onMediaItemTransition(mediaItem, reason)

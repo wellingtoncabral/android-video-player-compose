@@ -1,14 +1,14 @@
 package com.wcabral.core.data.network.di
 
 import com.wcabral.core.data.network.BuildConfig
-import com.wcabral.core.data.network.GamesDataSource
-import com.wcabral.core.data.network.StoresDataSource
+import com.wcabral.core.data.network.source.GamesDataSource
+import com.wcabral.core.data.network.source.StoresDataSource
 import com.wcabral.core.data.network.retrofit.ApiConstants
 import com.wcabral.core.data.network.retrofit.Endpoints
 import com.wcabral.core.data.network.retrofit.RetrofitApi
-import com.wcabral.core.data.network.retrofit.GamesDataSourceImpl
+import com.wcabral.core.data.network.source.GamesDataSourceImpl
 import com.wcabral.core.data.network.retrofit.RetrofitInterceptor
-import com.wcabral.core.data.network.retrofit.StoresDataSourceImpl
+import com.wcabral.core.data.network.source.StoresDataSourceImpl
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -16,19 +16,3 @@ fun ResultsResponse.toModel() = Game(
 )
 
 fun GetAllGamesResponse.toModel() : List<Game> = results.map { it.toModel() }
-
-fun List<PlatformResponse>?.toModel() = this?.map { platformResponse ->
-    Platform(
-        id = platformResponse.platform.id,
-        name = platformResponse.platform.name,
-        platformType = when (platformResponse.platform.id) {
-            1, 14, 186 -> PlatformType.XBOX
-            4 -> PlatformType.PC
-            5 -> PlatformType.APPLE
-            6 -> PlatformType.LINUX
-            7 -> PlatformType.NINTENDO
-            16, 18, 187 -> PlatformType.PLAYSTATION
-            else -> PlatformType.UNKNOWN
-        }
-    )
-}?.distinctBy { it.platformType }

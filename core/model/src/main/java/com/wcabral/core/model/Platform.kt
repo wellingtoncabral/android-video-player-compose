@@ -53,3 +53,12 @@ val previewPlatformNintendo = Platform(
     name = "Nintendo",
     platformType = PlatformType.NINTENDO
 )
+
+val previewPlatforms = listOf(
+    previewPlatformPC,
+    previewPlatformLinux,
+    previewPlatformApple,
+    previewPlatformXbox,
+    previewPlatformPlaystation,
+    previewPlatformNintendo,
+)

@@ -1,6 +1,6 @@
 package com.wcabral.core.data.network.retrofit
 
-import com.wcabral.core.data.network.model.GetGameDetailsResponse
+import com.wcabral.core.data.network.model.GetGameDetailResponse
 import com.wcabral.core.data.network.model.GetAllGamesResponse
 import com.wcabral.core.data.network.model.GetAllMoviesResponse
 import com.wcabral.core.data.network.model.GetAllStoresResponse
@@ -18,16 +18,10 @@ interface RetrofitApi {
     suspend fun getAllStores(): GetAllStoresResponse
 
     @GET(Endpoints.GET_GAME_DETAILS)
-    suspend fun getGameDetails(
+    suspend fun getGameDetail(
         @Path("id") gameId: Int
-    ): GetGameDetailsResponse
+    ): GetGameDetailResponse
 
-
-//    @GET("api/games/{id}/movies")
-//    suspend fun getGameVideos(
-//        @Path("id") gameId: Int
-//    ): GetGameVideosResponse
-//
 //    @GET("api/games?parent_platforms=1,2,3&search_precise=false&search_exact=false")
 //    suspend fun searchGames(
 //        @Query("search") query: String

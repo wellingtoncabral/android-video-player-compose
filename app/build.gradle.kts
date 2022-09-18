@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:navigation"))
     implementation(project(":feature:games"))
+    implementation(project(":feature:game-detail"))
     implementation(project(":feature:videos"))
 
     implementation(libs.androidx.core.ktx)

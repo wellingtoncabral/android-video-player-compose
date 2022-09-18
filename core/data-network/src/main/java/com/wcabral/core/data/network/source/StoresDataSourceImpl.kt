@@ -1,7 +1,7 @@
-package com.wcabral.core.data.network.retrofit
+package com.wcabral.core.data.network.source
 
-import com.wcabral.core.data.network.StoresDataSource
 import com.wcabral.core.data.network.model.GetAllStoresResponse
+import com.wcabral.core.data.network.retrofit.RetrofitApi
 
 class StoresDataSourceImpl(
     private val retrofitApi: RetrofitApi
@@ -10,5 +10,4 @@ class StoresDataSourceImpl(
     override suspend fun getAllStores(): GetAllStoresResponse {
         return retrofitApi.getAllStores()
     }
-
 }

@@ -1,4 +1,4 @@
-package com.wcabral.core.data.network
+package com.wcabral.core.data.network.source
 
 import com.wcabral.core.data.network.model.GetAllStoresResponse
 

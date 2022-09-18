@@ -1,23 +1,48 @@
-package com.wcabral.feature.games
+package com.wcabral.game.detail
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.content.res.Configuration
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Chip
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import coil.compose.SubcomposeAsyncImage
+import coil.request.ImageRequest
+import com.google.accompanist.flowlayout.FlowRow
+import com.wcabral.core.designsystem.component.DesignSystemBackground
+import com.wcabral.core.designsystem.component.DesignSystemCard
+import com.wcabral.core.designsystem.component.DesignSystemHeader
 import com.wcabral.core.designsystem.component.DesignSystemLoading
+import com.wcabral.core.designsystem.component.DesignSystemRoundedIconButton
 import com.wcabral.core.designsystem.component.ErrorPage
 import com.wcabral.core.designsystem.dimen.DesignSystemDimens
+import com.wcabral.core.designsystem.icon.DesignSystemIcons
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
+import com.wcabral.core.model.GameDetail
+import com.wcabral.core.model.Platform
+import com.wcabral.core.model.previewGameDetail
 import com.wcabral.core.model.previewGames
 import com.wcabral.core.model.previewStores
 import com.wcabral.core.ui.SIDE_EFFECTS_KEY
@@ -25,50 +50,45 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
-fun GamesRoute(
-    navigateToGameDetail: (gameId: Int) -> Unit,
+fun GameDetailRoute(
+    gameId: Int,
+    navigateToGameVideos: (gameId: Int) -> Unit,
     onBackClick: () -> Unit,
 ) {
-    val viewModel = getViewModel<GamesViewModel>()
-    GamesScreen(
+    val viewModel = getViewModel<GameDetailViewModel> { parametersOf(gameId) }
+    GameDetailScreen(
         state = viewModel.viewState.value,
         effectFlow = viewModel.effect,
         onEventSent = { event ->  viewModel.setEvent(event) },
         onNavigationRequested = { navigationEffect ->
             when (navigationEffect) {
-                is GamesContract.Effect.Navigation.Back -> onBackClick()
-                is GamesContract.Effect.Navigation.ToGameDetail -> navigateToGameDetail(navigationEffect.gameId)
+                is GameDetailContract.Effect.Navigation.Back -> onBackClick()
+                is GameDetailContract.Effect.Navigation.ToGameVideos -> navigateToGameVideos(navigationEffect.gameId)
             }
         },
     )
 }
 
 @Composable
-fun GamesScreen(
-    state: GamesContract.State,
-    effectFlow: Flow<GamesContract.Effect>?,
-    onEventSent: (event: GamesContract.Event) -> Unit,
-    onNavigationRequested: (navigationEffect: GamesContract.Effect.Navigation) -> Unit,
+fun GameDetailScreen(
+    state: GameDetailContract.State,
+    effectFlow: Flow<GameDetailContract.Effect>?,
+    onEventSent: (event: GameDetailContract.Event) -> Unit,
+    onNavigationRequested: (navigationEffect: GameDetailContract.Effect.Navigation) -> Unit,
 ) {
     val scaffoldState: ScaffoldState = rememberScaffoldState()
-    val snackBarMessage = stringResource(R.string.games_screen_snackbar_loaded_message)
 
     LaunchedEffect(SIDE_EFFECTS_KEY) {
         effectFlow?.onEach { effect ->
             when (effect) {
-                is GamesContract.Effect.DataWasLoaded -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
-                        message = snackBarMessage,
-                        duration = SnackbarDuration.Short
-                    )
+                is GameDetailContract.Effect.Navigation.Back -> {
+                    onNavigationRequested(GameDetailContract.Effect.Navigation.Back)
                 }
-                is GamesContract.Effect.Navigation.Back -> {
-                    onNavigationRequested(GamesContract.Effect.Navigation.Back)
-                }
-                is GamesContract.Effect.Navigation.ToGameDetail -> {
-                    onNavigationRequested(GamesContract.Effect.Navigation.ToGameDetail(effect.gameId))
+                is GameDetailContract.Effect.Navigation.ToGameVideos -> {
+                    onNavigationRequested(GameDetailContract.Effect.Navigation.ToGameVideos(effect.gameId))
                 }
             }
         }?.collect()
@@ -77,7 +97,7 @@ fun GamesScreen(
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            GamesToolbar(onNavigationClick = { onEventSent(GamesContract.Event.BackButtonClicked) })
+            GamesToolbar(onNavigationClick = { onEventSent(GameDetailContract.Event.BackButtonClicked) })
         },
     ) {
         Column(modifier = Modifier.padding(horizontal = DesignSystemDimens.Padding.ScreenHorizontal)) {
@@ -88,12 +108,11 @@ fun GamesScreen(
                     descriptionRes = R.string.generic_error_description,
                     buttonTitleRes = R.string.generic_error_button_title,
                 ) {
-                    onEventSent(GamesContract.Event.Retry)
+                    onEventSent(GameDetailContract.Event.Retry)
                 }
-                else -> GamesNestedList(
-                    list = state.games,
-                    stores = state.stores,
-                    onGameClick = { game -> onEventSent(GamesContract.Event.GameSelection(game.id)) }
+                state.gameDetail != null -> GameDetailView(
+                    gameDetail = state.gameDetail,
+                    onNavigateToGameVideos = { gameId -> onEventSent(GameDetailContract.Event.VideosClicked(gameId)) }
                 )
             }
         }
@@ -105,16 +124,15 @@ fun GamesScreen(
 @Preview(name = "foldable", device = Devices.FOLDABLE)
 @Preview(name = "tablet", device = Devices.TABLET)
 @Preview("light mode")
-@Preview("dark mode", uiMode = UI_MODE_NIGHT_YES)
+@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun GamesScreenPopulated() {
+fun GameDetailScreenPopulated() {
     DesignSystemTheme {
-        GamesScreen(
-            state = GamesContract.State(
-                games = previewGames,
-                stores = previewStores,
+        GameDetailScreen(
+            state = GameDetailContract.State(
+                gameDetail = previewGameDetail,
                 isLoading = false,
-                isError = false,
+                isError = false
             ),
             effectFlow = null,
             onEventSent = {},
@@ -128,14 +146,13 @@ fun GamesScreenPopulated() {
 @Preview(name = "foldable", device = Devices.FOLDABLE)
 @Preview(name = "tablet", device = Devices.TABLET)
 @Preview("light mode")
-@Preview("dark mode", uiMode = UI_MODE_NIGHT_YES)
+@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun GamesScreenLoading() {
+fun GameDetailScreenLoading() {
     DesignSystemTheme {
-        GamesScreen(
-            state = GamesContract.State(
-                games = emptyList(),
-                stores = emptyList(),
+        GameDetailScreen(
+            state = GameDetailContract.State(
+                gameDetail = null,
                 isLoading = true,
                 isError = false
             ),
@@ -151,14 +168,13 @@ fun GamesScreenLoading() {
 @Preview(name = "foldable", device = Devices.FOLDABLE)
 @Preview(name = "tablet", device = Devices.TABLET)
 @Preview("light mode")
-@Preview("dark mode", uiMode = UI_MODE_NIGHT_YES)
+@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun GamesScreenError() {
+fun GameDetailScreenError() {
     DesignSystemTheme {
-        GamesScreen(
-            state = GamesContract.State(
-                games = emptyList(),
-                stores = emptyList(),
+        GameDetailScreen(
+            state = GameDetailContract.State(
+                gameDetail = null,
                 isLoading = false,
                 isError = true
             ),

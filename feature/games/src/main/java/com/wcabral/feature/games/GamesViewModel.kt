@@ -27,7 +27,7 @@ class GamesViewModel(
         when (event) {
             is GamesContract.Event.GameSelection -> {
                 setEffect {
-                    GamesContract.Effect.Navigation.ToGameVideos(event.gameId)
+                    GamesContract.Effect.Navigation.ToGameDetail(event.gameId)
                 }
             }
             is GamesContract.Event.BackButtonClicked -> {

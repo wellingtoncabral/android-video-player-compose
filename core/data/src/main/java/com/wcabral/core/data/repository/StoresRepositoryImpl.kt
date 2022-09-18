@@ -1,7 +1,7 @@
 package com.wcabral.core.data.repository
 
 import com.wcabral.core.data.mapper.toModel
-import com.wcabral.core.data.network.StoresDataSource
+import com.wcabral.core.data.network.source.StoresDataSource
 import com.wcabral.core.model.Store
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

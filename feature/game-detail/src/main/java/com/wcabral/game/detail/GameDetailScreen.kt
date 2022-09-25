@@ -100,7 +100,7 @@ fun GameDetailScreen(
             GamesToolbar(onNavigationClick = { onEventSent(GameDetailContract.Event.BackButtonClicked) })
         },
     ) {
-        Column(modifier = Modifier.padding(horizontal = DesignSystemDimens.Padding.ScreenHorizontal)) {
+        Column {
             when {
                 state.isLoading -> DesignSystemLoading(modifier = Modifier.fillMaxSize())
                 state.isError -> ErrorPage(

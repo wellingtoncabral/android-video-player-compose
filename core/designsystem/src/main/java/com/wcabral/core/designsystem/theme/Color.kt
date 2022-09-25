@@ -10,7 +10,6 @@ import androidx.compose.ui.graphics.Color
 // Theme
 object DesignSystemColors {
     private val Yellow800 = Color(0xFFF9A825)
-    val Accent = Color(0xFFFF8216)
     val Black = Color.Black
     val White = Color.White
     val Light = White
@@ -18,4 +17,5 @@ object DesignSystemColors {
     val Dark = Color(0xFF181A21)
     val DarkSurface = Color(0xFF20222A)
     val Star = Yellow800
+    val Accent = Color(0xFFFF8216)
 }

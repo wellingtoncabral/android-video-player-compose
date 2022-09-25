@@ -11,7 +11,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.wcabral.core.designsystem.component.DesignSystemBackground
 import com.wcabral.core.designsystem.component.DesignSystemHeader
+import com.wcabral.core.designsystem.component.DesignSystemRating
 import com.wcabral.core.designsystem.dimen.DesignSystemDimens
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
 import com.wcabral.core.model.GameDetail
@@ -26,38 +28,34 @@ fun GameDetailView(
 
     Column(modifier = Modifier
         .fillMaxSize()
-        .padding(DesignSystemDimens.Padding.ScreenAll)
         .verticalScroll(scrollState)
     ) {
-        GameDetailThumbnail(
-            gameDetail,
-            onNavigateToGameVideos
-        )
-
+        GameDetailThumbnail(gameDetail, onNavigateToGameVideos)
         Spacer(modifier = Modifier.size(DesignSystemDimens.Padding.Medium))
-
-        DesignSystemHeader(title = gameDetail.name)
-
-        Spacer(modifier = Modifier.size(DesignSystemDimens.Padding.Small))
-
-        GameDetailPlatforms(platforms = gameDetail.platforms)
-
-        Spacer(modifier = Modifier.size(DesignSystemDimens.Padding.Small))
-
-        Text(
-            text = gameDetail.description,
+        Column(modifier = Modifier
+            .padding(DesignSystemDimens.Padding.ScreenAll)) {
+            DesignSystemHeader(title = gameDetail.name)
+            DesignSystemRating(value = gameDetail.rating)
+            Spacer(modifier = Modifier.size(DesignSystemDimens.Padding.Small))
+            GameDetailPlatforms(platforms = gameDetail.platforms)
+            Spacer(modifier = Modifier.size(DesignSystemDimens.Padding.Small))
+            Text(
+                text = gameDetail.description,
 //            maxLines = maxLines,
 //            overflow = TextOverflow.Ellipsis
-        )
+            )
+        }
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 fun GameDetailViewPreview() {
     DesignSystemTheme {
-        GameDetailView(
-            gameDetail = previewGameDetail
-        ) {}
+        DesignSystemBackground {
+            GameDetailView(
+                gameDetail = previewGameDetail
+            ) {}
+        }
     }
 }

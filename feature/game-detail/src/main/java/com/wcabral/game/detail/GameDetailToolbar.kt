@@ -18,8 +18,8 @@ fun GamesToolbar(onNavigationClick: () -> Unit) {
         navigationIcon = ImageVector.vectorResource(id = DesignSystemIcons.ArrowBack),
         navigationIconContentDescription = stringResource(id = R.string.back),
         onNavigationClick = onNavigationClick,
-        actionIcon = ImageVector.vectorResource(id = DesignSystemIcons.Search),
-        actionIconContentDescription = stringResource(id = R.string.search)
+        actionIcon = null,
+        actionIconContentDescription = null,
     )
 }
 

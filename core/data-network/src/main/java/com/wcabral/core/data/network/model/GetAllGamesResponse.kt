@@ -15,7 +15,7 @@ data class ResultsResponse(
     @SerializedName("background_image")
     val backgroundImage: String,
     @SerializedName("rating")
-    val rating: Float,
+    val rating: Double,
     @SerializedName("platforms")
     val platforms: List<PlatformResponse>?,
 )

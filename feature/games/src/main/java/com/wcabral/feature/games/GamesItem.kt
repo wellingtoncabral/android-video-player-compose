@@ -4,7 +4,6 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,12 +24,11 @@ import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.wcabral.core.designsystem.component.DesignSystemBackground
 import com.wcabral.core.designsystem.component.DesignSystemCard
-import com.wcabral.core.designsystem.component.DesignSystemIcon
 import com.wcabral.core.designsystem.component.DesignSystemLoading
 import com.wcabral.core.designsystem.component.DesignSystemRoundedIconButton
+import com.wcabral.core.designsystem.component.DesignSystemRating
 import com.wcabral.core.designsystem.dimen.DesignSystemDimens
 import com.wcabral.core.designsystem.icon.DesignSystemIcons
-import com.wcabral.core.designsystem.theme.DesignSystemColors
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
 import com.wcabral.core.model.Game
 import com.wcabral.core.model.Platform
@@ -99,7 +97,7 @@ fun GamesItemDetails(game: Game) {
             text = game.name,
             style = MaterialTheme.typography.h5,
         )
-        GamesItemRating(game.rating)
+        DesignSystemRating(game.rating)
     }
 }
 
@@ -120,25 +118,6 @@ fun GamesItemPlatforms(platforms: List<Platform>) {
                 )
             }
         }
-    }
-}
-
-@Composable
-fun GamesItemRating(value: Float) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(top = DesignSystemDimens.Padding.ExtraSmall)
-    ) {
-        DesignSystemIcon(
-            imageVector = DesignSystemIcons.Star,
-            contentDescription = null,
-            tint = DesignSystemColors.Star
-        )
-        Spacer(modifier = Modifier.padding(horizontal = DesignSystemDimens.Padding.ExtraSmall))
-        Text(
-            text = value.toString(),
-            style = MaterialTheme.typography.button,
-        )
     }
 }
 

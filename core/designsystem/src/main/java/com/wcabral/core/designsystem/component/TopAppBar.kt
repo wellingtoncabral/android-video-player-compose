@@ -27,7 +27,7 @@ fun DesignSystemTopAppBar(
     @StringRes titleRes: Int,
     navigationIcon: ImageVector,
     navigationIconContentDescription: String?,
-    actionIcon: ImageVector,
+    actionIcon: ImageVector?,
     actionIconContentDescription: String?,
     backgroundColor: Color = MaterialTheme.colors.background,
     elevation: Dp = 0.dp,
@@ -52,12 +52,14 @@ fun DesignSystemTopAppBar(
             }
         },
         actions = {
-            IconButton(onClick = onActionClick) {
-                Icon(
-                    imageVector = actionIcon,
-                    contentDescription = actionIconContentDescription,
-                    tint = DesignSystemColors.Accent,
-                )
+            actionIcon?.let {
+                IconButton(onClick = onActionClick) {
+                    Icon(
+                        imageVector = actionIcon,
+                        contentDescription = actionIconContentDescription,
+                        tint = DesignSystemColors.Accent,
+                    )
+                }
             }
         },
         backgroundColor = backgroundColor,

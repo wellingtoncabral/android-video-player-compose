@@ -2,8 +2,8 @@ package com.wcabral.core.designsystem.component
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -14,7 +14,7 @@ import com.wcabral.core.designsystem.theme.DesignSystemTheme
 @Composable
 fun DesignSystemBackground(
     modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colors.background,
+    color: Color = MaterialTheme.colorScheme.background,
     content: @Composable () -> Unit,
 ) {
     Surface(

@@ -6,4 +6,5 @@ plugins {
 
 dependencies {
     implementation(libs.accompanist.flowlayout)
+    implementation(libs.coil.compose)
 }

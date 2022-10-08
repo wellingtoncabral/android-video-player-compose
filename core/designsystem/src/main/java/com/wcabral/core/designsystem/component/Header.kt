@@ -1,8 +1,8 @@
 package com.wcabral.core.designsystem.component
 
 import androidx.annotation.StringRes
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -27,7 +27,7 @@ fun DesignSystemHeader(
 ) {
     Text(
         text = title,
-        style = MaterialTheme.typography.h5.copy(
+        style = MaterialTheme.typography.headlineSmall.copy(
             fontWeight = FontWeight.Bold
         ),
         modifier = modifier

@@ -1,26 +1,26 @@
 package com.wcabral.feature.games
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.SnackbarDuration
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import com.wcabral.core.designsystem.component.DesignSystemLoading
 import com.wcabral.core.designsystem.component.ErrorPage
-import com.wcabral.core.designsystem.dimen.DesignSystemDimens
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
 import com.wcabral.core.model.previewGames
 import com.wcabral.core.model.previewStores
 import com.wcabral.core.ui.SIDE_EFFECTS_KEY
+import com.wcabral.core.ui.previews.DevicePreviews
+import com.wcabral.core.ui.previews.LightAndNightPreviews
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -45,6 +45,7 @@ fun GamesRoute(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GamesScreen(
     state: GamesContract.State,
@@ -52,14 +53,14 @@ fun GamesScreen(
     onEventSent: (event: GamesContract.Event) -> Unit,
     onNavigationRequested: (navigationEffect: GamesContract.Effect.Navigation) -> Unit,
 ) {
-    val scaffoldState: ScaffoldState = rememberScaffoldState()
+    val snackbarHostState = remember { SnackbarHostState() }
     val snackBarMessage = stringResource(R.string.games_screen_snackbar_loaded_message)
 
     LaunchedEffect(SIDE_EFFECTS_KEY) {
         effectFlow?.onEach { effect ->
             when (effect) {
                 is GamesContract.Effect.DataWasLoaded -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
+                    snackbarHostState.showSnackbar(
                         message = snackBarMessage,
                         duration = SnackbarDuration.Short
                     )
@@ -75,12 +76,14 @@ fun GamesScreen(
     }
 
     Scaffold(
-        scaffoldState = scaffoldState,
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
-            GamesToolbar(onNavigationClick = { onEventSent(GamesContract.Event.BackButtonClicked) })
+            GamesToolbar(
+                onNavigationClick = { onEventSent(GamesContract.Event.BackButtonClicked) },
+            )
         },
-    ) {
-        Column(modifier = Modifier.padding(horizontal = DesignSystemDimens.Padding.ScreenHorizontal)) {
+    ) { innerPadding ->
+        Column(modifier = Modifier.padding(innerPadding)) {
             when {
                 state.isLoading -> DesignSystemLoading(modifier = Modifier.fillMaxSize())
                 state.isError -> ErrorPage(
@@ -100,12 +103,8 @@ fun GamesScreen(
     }
 }
 
-@Preview(name = "phone", device = Devices.PHONE)
-@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480")
-@Preview(name = "foldable", device = Devices.FOLDABLE)
-@Preview(name = "tablet", device = Devices.TABLET)
-@Preview("light mode")
-@Preview("dark mode", uiMode = UI_MODE_NIGHT_YES)
+@DevicePreviews
+@LightAndNightPreviews
 @Composable
 fun GamesScreenPopulated() {
     DesignSystemTheme {
@@ -123,12 +122,8 @@ fun GamesScreenPopulated() {
     }
 }
 
-@Preview(name = "phone", device = Devices.PHONE)
-@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480")
-@Preview(name = "foldable", device = Devices.FOLDABLE)
-@Preview(name = "tablet", device = Devices.TABLET)
-@Preview("light mode")
-@Preview("dark mode", uiMode = UI_MODE_NIGHT_YES)
+@DevicePreviews
+@LightAndNightPreviews
 @Composable
 fun GamesScreenLoading() {
     DesignSystemTheme {
@@ -146,12 +141,8 @@ fun GamesScreenLoading() {
     }
 }
 
-@Preview(name = "phone", device = Devices.PHONE)
-@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480")
-@Preview(name = "foldable", device = Devices.FOLDABLE)
-@Preview(name = "tablet", device = Devices.TABLET)
-@Preview("light mode")
-@Preview("dark mode", uiMode = UI_MODE_NIGHT_YES)
+@DevicePreviews
+@LightAndNightPreviews
 @Composable
 fun GamesScreenError() {
     DesignSystemTheme {

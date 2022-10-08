@@ -13,7 +13,14 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.compose.ui)
+    // Modules
+    implementation(project(":core:designsystem"))
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Android X
+    implementation(libs.androidx.core.ktx)
+
+    // Compose
+    implementation(libs.androidx.compose.ui)
+    api(libs.androidx.compose.ui.tooling.preview)
 }

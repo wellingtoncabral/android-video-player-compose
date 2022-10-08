@@ -33,25 +33,31 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:ui"))
-    implementation(project(":core:data"))
-    implementation(project(":core:data-network"))
-    implementation(project(":core:designsystem"))
-    implementation(project(":core:navigation"))
+    // Features modules
     implementation(project(":feature:games"))
     implementation(project(":feature:game-detail"))
     implementation(project(":feature:videos"))
 
+    // Core modules
+    implementation(project(":core:ui"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:navigation"))
+    implementation(project(":core:data"))
+    implementation(project(":core:data-network"))
+
+    // Android X
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Compose
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-
-    implementation(libs.koin.android)
-
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // Koin
+    implementation(libs.koin.android)
 }

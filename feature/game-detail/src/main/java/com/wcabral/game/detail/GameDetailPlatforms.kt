@@ -1,6 +1,6 @@
 package com.wcabral.game.detail
 
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -12,7 +12,9 @@ import com.wcabral.core.model.previewPlatforms
 
 @Composable
 fun GameDetailPlatforms(platforms: List<Platform>) {
-    FlowRow(mainAxisSpacing = 2.dp) {
+    FlowRow(
+        mainAxisSpacing = 2.dp,
+    ) {
         platforms.forEach { platform ->
             DesignSystemChip(onClick = {  }) { Text(text = platform.name) }
         }

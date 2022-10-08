@@ -1,25 +1,41 @@
 package com.wcabral.core.designsystem.component
 
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.Chip
-import androidx.compose.material.ChipDefaults
-import androidx.compose.material.ExperimentalMaterialApi
+import android.content.res.Configuration
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SuggestionChip
+import androidx.compose.material3.SuggestionChipDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.wcabral.core.designsystem.theme.DesignSystemColors
+import androidx.compose.ui.tooling.preview.Preview
+import com.wcabral.core.designsystem.theme.DesignSystemTheme
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DesignSystemChip(
     onClick: () -> Unit,
-    content: @Composable RowScope.() -> Unit
+    label: @Composable () -> Unit
 ) {
-    Chip(
-        colors = ChipDefaults.chipColors(
-            backgroundColor = DesignSystemColors.Accent,
-            contentColor = DesignSystemColors.White
+    SuggestionChip(
+        label = { label() },
+        colors = SuggestionChipDefaults.suggestionChipColors(
+            containerColor = MaterialTheme.colorScheme.tertiary,
+            labelColor = MaterialTheme.colorScheme.onTertiary
         ),
-        onClick = onClick
-    ) {
-        content()
+        onClick = onClick,
+        border = SuggestionChipDefaults.suggestionChipBorder(
+            borderColor = MaterialTheme.colorScheme.tertiary,
+        )
+    )
+}
+
+@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview("light mode")
+@Composable
+fun DesignSystemChip() {
+    DesignSystemTheme {
+        DesignSystemChip(onClick = {  }) {
+            Text(text = "Chip text")
+        }
     }
 }

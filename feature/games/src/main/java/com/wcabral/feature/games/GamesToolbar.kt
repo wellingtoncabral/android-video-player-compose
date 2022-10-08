@@ -1,14 +1,19 @@
 package com.wcabral.feature.games
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.wcabral.core.designsystem.component.DesignSystemTopAppBar
 import com.wcabral.core.designsystem.icon.DesignSystemIcons
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
+import com.wcabral.core.ui.previews.LightAndNightPreviews
 
 @Composable
 fun GamesToolbar(onNavigationClick: () -> Unit) {
@@ -18,12 +23,14 @@ fun GamesToolbar(onNavigationClick: () -> Unit) {
         navigationIconContentDescription = stringResource(id = R.string.back),
         onNavigationClick = onNavigationClick,
         actionIcon = ImageVector.vectorResource(id = DesignSystemIcons.Search),
-        actionIconContentDescription = stringResource(id = R.string.search)
+        actionIconContentDescription = stringResource(id = R.string.search),
+        modifier = Modifier.windowInsetsPadding(
+            WindowInsets.safeDrawing.only(WindowInsetsSides.Top)
+        )
     )
 }
 
-@Preview("night mode", uiMode = UI_MODE_NIGHT_YES)
-@Preview("light mode", )
+@LightAndNightPreviews
 @Composable
 fun VideosToolbarPreview() {
     DesignSystemTheme {

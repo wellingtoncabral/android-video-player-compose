@@ -1,17 +1,17 @@
 package com.wcabral.feature.videos
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
+import com.wcabral.core.designsystem.component.DesignSystemBackground
 import com.wcabral.core.designsystem.component.DesignSystemLoading
 import com.wcabral.core.designsystem.component.ErrorPage
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
 import com.wcabral.core.model.previewVideos
 import com.wcabral.core.ui.SIDE_EFFECTS_KEY
+import com.wcabral.core.ui.previews.DevicePreviews
+import com.wcabral.core.ui.previews.LightAndNightPreviews
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -71,74 +71,67 @@ fun VideosScreen(
     }
 }
 
-@Preview(name = "phone", device = Devices.PHONE)
-@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480")
-@Preview(name = "foldable", device = Devices.FOLDABLE)
-@Preview(name = "tablet", device = Devices.TABLET)
-@Preview("light mode")
-@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
+@LightAndNightPreviews
 @Composable
 fun VideosScreenPopulated() {
     DesignSystemTheme {
-        VideosScreen(
-            state = VideosContract.State(
-                mediaPlayer = null,
-                videos = previewVideos,
-                currentMediaId = "",
-                isLoading = false,
-                isError = false,
-            ),
-            effectFlow = null,
-            onEventSent = {},
-            onNavigationRequested = {},
-        )
+        DesignSystemBackground {
+            VideosScreen(
+                state = VideosContract.State(
+                    mediaPlayer = null,
+                    videos = previewVideos,
+                    currentMediaId = "",
+                    isLoading = false,
+                    isError = false,
+                ),
+                effectFlow = null,
+                onEventSent = {},
+                onNavigationRequested = {},
+            )
+        }
     }
 }
 
-@Preview(name = "phone", device = Devices.PHONE)
-@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480")
-@Preview(name = "foldable", device = Devices.FOLDABLE)
-@Preview(name = "tablet", device = Devices.TABLET)
-@Preview("light mode")
-@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@LightAndNightPreviews
 @Composable
 fun VideosScreenLoading() {
     DesignSystemTheme {
-        VideosScreen(
-            state = VideosContract.State(
-                mediaPlayer = null,
-                videos = emptyList(),
-                currentMediaId = null,
-                isLoading = true,
-                isError = false,
-            ),
-            effectFlow = null,
-            onEventSent = {},
-            onNavigationRequested = {},
-        )
+        DesignSystemBackground {
+            VideosScreen(
+                state = VideosContract.State(
+                    mediaPlayer = null,
+                    videos = emptyList(),
+                    currentMediaId = null,
+                    isLoading = true,
+                    isError = false,
+                ),
+                effectFlow = null,
+                onEventSent = {},
+                onNavigationRequested = {},
+            )
+        }
     }
 }
 
-@Preview(name = "phone", device = Devices.PHONE)
-@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480")
-@Preview(name = "foldable", device = Devices.FOLDABLE)
-@Preview(name = "tablet", device = Devices.TABLET)
-@Preview("light mode")
-@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
+@LightAndNightPreviews
 @Composable
 fun GamesScreenError() {
     DesignSystemTheme {
-        VideosScreen(
-            state = VideosContract.State(
-                mediaPlayer = null,
-                videos = emptyList(),
-                currentMediaId = null,
-                isLoading = true,
-                isError = true,
-            ),
-            effectFlow = null,
-            onEventSent = {},
-            onNavigationRequested = {},
-        )
+        DesignSystemBackground {
+            VideosScreen(
+                state = VideosContract.State(
+                    mediaPlayer = null,
+                    videos = emptyList(),
+                    currentMediaId = null,
+                    isLoading = false,
+                    isError = true,
+                ),
+                effectFlow = null,
+                onEventSent = {},
+                onNavigationRequested = {},
+            )
+        }
     }
 }

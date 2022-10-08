@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -59,7 +59,7 @@ fun StoresItemDetails(store: Store) {
             .fillMaxWidth()
             .padding(DesignSystemDimens.Padding.ScreenAll),
         maxLines = 1,
-        style = MaterialTheme.typography.button.copy(fontWeight = FontWeight.Bold)
+        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
     )
 }
 

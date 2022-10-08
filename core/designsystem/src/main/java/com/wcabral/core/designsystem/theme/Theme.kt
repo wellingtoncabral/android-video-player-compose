@@ -1,34 +1,38 @@
 package com.wcabral.core.designsystem.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-private val DarkColorPalette = darkColors(
+private val DarkColorPalette = darkColorScheme(
     primary = DesignSystemColors.Dark,
-    primaryVariant = DesignSystemColors.Dark,
+    primaryContainer = DesignSystemColors.Dark,
     secondary = DesignSystemColors.Light,
+    tertiary = DesignSystemColors.Accent,
     background = DesignSystemColors.Dark,
     surface = DesignSystemColors.DarkSurface,
     onPrimary = DesignSystemColors.Light,
     onSecondary = DesignSystemColors.Light,
+    onTertiary = DesignSystemColors.Black,
     onBackground = DesignSystemColors.Light,
     onSurface = DesignSystemColors.Light,
 )
 
-private val LightColorPalette = lightColors(
+private val LightColorPalette = lightColorScheme(
     primary = DesignSystemColors.Light,
-    primaryVariant = DesignSystemColors.Light,
+    primaryContainer = DesignSystemColors.Light,
     secondary = DesignSystemColors.Dark,
+    tertiary = DesignSystemColors.Accent,
     background = DesignSystemColors.Light,
     surface = DesignSystemColors.LightSurface,
     onPrimary = DesignSystemColors.Dark,
     onSecondary = DesignSystemColors.Dark,
+    onTertiary = DesignSystemColors.White,
     onBackground = DesignSystemColors.Dark,
     onSurface = DesignSystemColors.Dark,
 )
@@ -48,7 +52,7 @@ fun DesignSystemTheme(
     SystemBarTranslucent(colors.background, !darkTheme)
 
     MaterialTheme(
-        colors = colors,
+        colorScheme = colors,
         typography = Typography,
         shapes = Shapes,
         content = content

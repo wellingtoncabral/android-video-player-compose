@@ -47,9 +47,9 @@ class GamesViewModel(
                 storesRepository.getAllStores(),
             ) { games, stores ->
                 setState { copy(isLoading = false, isError = false, games = games, stores = stores) }
-            }.catch { e ->
+                setEffect { GamesContract.Effect.DataWasLoaded }
+            }.catch {
                 setState { copy(isLoading = false, isError = true) }
-                println("WELL: ${e.message}")
             }.collect()
         }
     }

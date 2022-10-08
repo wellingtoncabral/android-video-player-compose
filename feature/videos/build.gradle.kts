@@ -6,4 +6,5 @@ plugins {
 
 dependencies {
     implementation(project(":video-player"))
+    implementation(libs.coil.compose)
 }

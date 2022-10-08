@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,8 +32,7 @@ fun GameDetailView(
     ) {
         GameDetailThumbnail(gameDetail, onNavigateToGameVideos)
         Spacer(modifier = Modifier.size(DesignSystemDimens.Padding.Medium))
-        Column(modifier = Modifier
-            .padding(DesignSystemDimens.Padding.ScreenAll)) {
+        Column(modifier = Modifier.padding(DesignSystemDimens.Padding.ScreenAll)) {
             DesignSystemHeader(title = gameDetail.name)
             DesignSystemRating(value = gameDetail.rating)
             Spacer(modifier = Modifier.size(DesignSystemDimens.Padding.Small))
@@ -41,8 +40,6 @@ fun GameDetailView(
             Spacer(modifier = Modifier.size(DesignSystemDimens.Padding.Small))
             Text(
                 text = gameDetail.description,
-//            maxLines = maxLines,
-//            overflow = TextOverflow.Ellipsis
             )
         }
     }

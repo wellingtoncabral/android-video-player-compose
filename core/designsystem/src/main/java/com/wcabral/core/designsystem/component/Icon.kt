@@ -1,7 +1,7 @@
 package com.wcabral.core.designsystem.component
 
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -12,7 +12,7 @@ fun DesignSystemIcon(
     imageVector: ImageVector,
     modifier: Modifier = Modifier,
     contentDescription: String?,
-    tint: Color = MaterialTheme.colors.onSurface,
+    tint: Color = MaterialTheme.colorScheme.onSurface,
 ) {
     Icon(
         modifier = modifier,

@@ -1,51 +1,23 @@
 package com.wcabral.game.detail
 
-import android.content.res.Configuration
-import androidx.compose.foundation.layout.Box
+import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Chip
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.SnackbarDuration
-import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import coil.compose.SubcomposeAsyncImage
-import coil.request.ImageRequest
-import com.google.accompanist.flowlayout.FlowRow
-import com.wcabral.core.designsystem.component.DesignSystemBackground
-import com.wcabral.core.designsystem.component.DesignSystemCard
-import com.wcabral.core.designsystem.component.DesignSystemHeader
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.wcabral.core.designsystem.component.DesignSystemLoading
-import com.wcabral.core.designsystem.component.DesignSystemRoundedIconButton
 import com.wcabral.core.designsystem.component.ErrorPage
-import com.wcabral.core.designsystem.dimen.DesignSystemDimens
-import com.wcabral.core.designsystem.icon.DesignSystemIcons
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
-import com.wcabral.core.model.GameDetail
-import com.wcabral.core.model.Platform
 import com.wcabral.core.model.previewGameDetail
-import com.wcabral.core.model.previewGames
-import com.wcabral.core.model.previewStores
 import com.wcabral.core.ui.SIDE_EFFECTS_KEY
+import com.wcabral.core.ui.previews.DevicePreviews
+import com.wcabral.core.ui.previews.LightAndNightPreviews
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -72,6 +44,7 @@ fun GameDetailRoute(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GameDetailScreen(
     state: GameDetailContract.State,
@@ -79,8 +52,6 @@ fun GameDetailScreen(
     onEventSent: (event: GameDetailContract.Event) -> Unit,
     onNavigationRequested: (navigationEffect: GameDetailContract.Effect.Navigation) -> Unit,
 ) {
-    val scaffoldState: ScaffoldState = rememberScaffoldState()
-
     LaunchedEffect(SIDE_EFFECTS_KEY) {
         effectFlow?.onEach { effect ->
             when (effect) {
@@ -94,10 +65,19 @@ fun GameDetailScreen(
         }?.collect()
     }
 
+    val decayAnimationSpec = rememberSplineBasedDecay<Float>()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+        decayAnimationSpec,
+        rememberTopAppBarScrollState()
+    )
+
     Scaffold(
-        scaffoldState = scaffoldState,
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            GamesToolbar(onNavigationClick = { onEventSent(GameDetailContract.Event.BackButtonClicked) })
+            GamesToolbar(
+                scrollBehavior = scrollBehavior,
+                onNavigationClick = { onEventSent(GameDetailContract.Event.BackButtonClicked) }
+            )
         },
     ) {
         Column {
@@ -119,12 +99,8 @@ fun GameDetailScreen(
     }
 }
 
-@Preview(name = "phone", device = Devices.PHONE)
-@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480")
-@Preview(name = "foldable", device = Devices.FOLDABLE)
-@Preview(name = "tablet", device = Devices.TABLET)
-@Preview("light mode")
-@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
+@LightAndNightPreviews
 @Composable
 fun GameDetailScreenPopulated() {
     DesignSystemTheme {
@@ -141,12 +117,8 @@ fun GameDetailScreenPopulated() {
     }
 }
 
-@Preview(name = "phone", device = Devices.PHONE)
-@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480")
-@Preview(name = "foldable", device = Devices.FOLDABLE)
-@Preview(name = "tablet", device = Devices.TABLET)
-@Preview("light mode")
-@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
+@LightAndNightPreviews
 @Composable
 fun GameDetailScreenLoading() {
     DesignSystemTheme {
@@ -163,12 +135,8 @@ fun GameDetailScreenLoading() {
     }
 }
 
-@Preview(name = "phone", device = Devices.PHONE)
-@Preview(name = "landscape", device = "spec:shape=Normal,width=640,height=360,unit=dp,dpi=480")
-@Preview(name = "foldable", device = Devices.FOLDABLE)
-@Preview(name = "tablet", device = Devices.TABLET)
-@Preview("light mode")
-@Preview("dark mode", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
+@LightAndNightPreviews
 @Composable
 fun GameDetailScreenError() {
     DesignSystemTheme {

@@ -46,7 +46,7 @@ fun GameDetailThumbnail(
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
-                .height(220.dp)
+                .height(280.dp)
                 .fillMaxWidth()
         )
 

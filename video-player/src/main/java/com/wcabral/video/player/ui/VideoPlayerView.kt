@@ -5,11 +5,12 @@ import android.widget.FrameLayout
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
@@ -34,7 +35,7 @@ fun VideoPlayerView(
 
     Box(
         modifier = modifier
-            .background(MaterialTheme.colors.background)
+            .background(MaterialTheme.colorScheme.background)
             .testTag("VideoPlayerParent")
     ) {
         AndroidView(factory = {
@@ -47,4 +48,10 @@ fun VideoPlayerView(
             }
         })
     }
+}
+
+@Preview
+@Composable
+fun VideoPlayerViewPreview() {
+    VideoPlayerView(mediaPlayer = null)
 }

@@ -12,11 +12,13 @@ object GamesDestination : NavigationDestination {
 
 fun NavGraphBuilder.gamesGraph(
     navigateToGameDetail: (gameId: Int) -> Unit,
+    navigateToStoreDetail: (storeId: Int) -> Unit,
     onBackClick: () -> Unit,
 ) {
     composable(route = GamesDestination.route) {
         GamesRoute(
             navigateToGameDetail = navigateToGameDetail,
+            navigateToStoreDetail = navigateToStoreDetail,
             onBackClick = onBackClick
         )
     }

@@ -37,6 +37,7 @@ dependencies {
     implementation(project(":feature:games"))
     implementation(project(":feature:game-detail"))
     implementation(project(":feature:videos"))
+    implementation(project(":feature:store-detail"))
 
     // Core modules
     implementation(project(":core:ui"))

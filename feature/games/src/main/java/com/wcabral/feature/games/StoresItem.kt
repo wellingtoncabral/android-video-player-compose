@@ -24,8 +24,11 @@ import com.wcabral.core.model.Store
 import com.wcabral.core.model.previewStore
 
 @Composable
-fun StoresItem(store: Store) {
-    DesignSystemCard {
+fun StoresItem(
+    store: Store,
+    onClick: (Store) -> Unit,
+) {
+    DesignSystemCard(onClick = { onClick(store) }) {
         Column(modifier = Modifier.width(150.dp)) {
             StoresItemHeader(store)
             StoresItemDetails(store)
@@ -37,7 +40,7 @@ fun StoresItem(store: Store) {
 fun StoresItemHeader(store: Store) {
     SubcomposeAsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
-            .data(store.imageBackground)
+            .data(store.backgroundImage)
             .crossfade(true)
             .build(),
         loading = {
@@ -67,6 +70,6 @@ fun StoresItemDetails(store: Store) {
 @Composable
 fun StoreItemPreview() {
     DesignSystemTheme {
-        StoresItem(store = previewStore)
+        StoresItem(store = previewStore, onClick = {})
     }
 }

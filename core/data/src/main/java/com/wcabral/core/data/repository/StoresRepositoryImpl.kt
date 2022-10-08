@@ -12,4 +12,7 @@ class StoresRepositoryImpl(private val networkDataSource: StoresDataSource) : St
         emit(networkDataSource.getAllStores().toModel())
     }
 
+    override suspend fun getStoreDetail(storeId: Int) = flow {
+        emit(networkDataSource.getStoreDetail(storeId).toModel())
+    }
 }

@@ -6,7 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.wcabral.core.designsystem.component.DesignSystemBackground
 import com.wcabral.core.designsystem.component.DesignSystemLoading
-import com.wcabral.core.designsystem.component.ErrorPage
+import com.wcabral.core.designsystem.component.DesignSystemErrorPage
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
 import com.wcabral.core.model.previewVideos
 import com.wcabral.core.ui.SIDE_EFFECTS_KEY
@@ -56,7 +56,7 @@ fun VideosScreen(
 
     when {
         state.isLoading -> DesignSystemLoading(modifier = Modifier.fillMaxSize())
-        state.isError -> ErrorPage(
+        state.isError -> DesignSystemErrorPage(
             titleRes = R.string.generic_error_title,
             descriptionRes = R.string.generic_error_description,
             buttonTitleRes = R.string.generic_error_button_title,

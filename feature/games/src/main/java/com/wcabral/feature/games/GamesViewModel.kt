@@ -30,6 +30,11 @@ class GamesViewModel(
                     GamesContract.Effect.Navigation.ToGameDetail(event.gameId)
                 }
             }
+            is GamesContract.Event.StoreSelection -> {
+                setEffect {
+                    GamesContract.Effect.Navigation.ToStoreDetail(event.storeId)
+                }
+            }
             is GamesContract.Event.BackButtonClicked -> {
                 setEffect {
                     GamesContract.Effect.Navigation.Back

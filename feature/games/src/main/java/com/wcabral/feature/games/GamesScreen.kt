@@ -14,7 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.wcabral.core.designsystem.component.DesignSystemLoading
-import com.wcabral.core.designsystem.component.ErrorPage
+import com.wcabral.core.designsystem.component.DesignSystemErrorPage
 import com.wcabral.core.designsystem.theme.DesignSystemTheme
 import com.wcabral.core.model.previewGames
 import com.wcabral.core.model.previewStores
@@ -29,6 +29,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun GamesRoute(
     navigateToGameDetail: (gameId: Int) -> Unit,
+    navigateToStoreDetail: (storeId: Int) -> Unit,
     onBackClick: () -> Unit,
 ) {
     val viewModel = getViewModel<GamesViewModel>()
@@ -40,6 +41,7 @@ fun GamesRoute(
             when (navigationEffect) {
                 is GamesContract.Effect.Navigation.Back -> onBackClick()
                 is GamesContract.Effect.Navigation.ToGameDetail -> navigateToGameDetail(navigationEffect.gameId)
+                is GamesContract.Effect.Navigation.ToStoreDetail -> navigateToStoreDetail(navigationEffect.storeId)
             }
         },
     )
@@ -71,6 +73,9 @@ fun GamesScreen(
                 is GamesContract.Effect.Navigation.ToGameDetail -> {
                     onNavigationRequested(GamesContract.Effect.Navigation.ToGameDetail(effect.gameId))
                 }
+                is GamesContract.Effect.Navigation.ToStoreDetail -> {
+                    onNavigationRequested(GamesContract.Effect.Navigation.ToStoreDetail(effect.storeId))
+                }
             }
         }?.collect()
     }
@@ -86,7 +91,7 @@ fun GamesScreen(
         Column(modifier = Modifier.padding(innerPadding)) {
             when {
                 state.isLoading -> DesignSystemLoading(modifier = Modifier.fillMaxSize())
-                state.isError -> ErrorPage(
+                state.isError -> DesignSystemErrorPage(
                     titleRes = R.string.generic_error_title,
                     descriptionRes = R.string.generic_error_description,
                     buttonTitleRes = R.string.generic_error_button_title,
@@ -96,7 +101,10 @@ fun GamesScreen(
                 else -> GamesNestedList(
                     list = state.games,
                     stores = state.stores,
-                    onGameClick = { game -> onEventSent(GamesContract.Event.GameSelection(game.id)) }
+                    onGameClick = { game -> onEventSent(GamesContract.Event.GameSelection(game.id)) },
+                    onStoreClick = {
+                        store -> onEventSent(GamesContract.Event.StoreSelection(store.id))
+                    }
                 )
             }
         }

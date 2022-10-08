@@ -9,8 +9,10 @@ import com.wcabral.feature.games.navigation.GamesDestination
 import com.wcabral.feature.games.navigation.gamesGraph
 import com.wcabral.feature.videos.navigation.GameVideosDestination
 import com.wcabral.feature.videos.navigation.gameVideosGraph
-import com.wcabral.game.detail.navigation.GameDetailDestination
-import com.wcabral.game.detail.navigation.gameDetailGraph
+import com.wcabral.feature.game.detail.navigation.GameDetailDestination
+import com.wcabral.feature.game.detail.navigation.gameDetailGraph
+import com.wcabral.feature.store.detail.navigation.StoreDetailDestination
+import com.wcabral.feature.store.detail.navigation.storeDetailGraph
 
 @Composable
 fun AppNavHost(
@@ -31,6 +33,11 @@ fun AppNavHost(
                     GameDetailDestination, GameDetailDestination.createNavigationRoute(gameId)
                 )
             },
+            navigateToStoreDetail = { storeId ->
+                onNavigateToDestination(
+                    StoreDetailDestination, StoreDetailDestination.createNavigationRoute(storeId)
+                )
+            },
             onBackClick = onBackClick,
         )
         gameDetailGraph(
@@ -42,5 +49,6 @@ fun AppNavHost(
             onBackClick = onBackClick,
         )
         gameVideosGraph(onBackClick = onBackClick)
+        storeDetailGraph(onBackClick = onBackClick)
     }
 }

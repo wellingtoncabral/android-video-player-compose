@@ -28,6 +28,7 @@ fun GamesNestedList(
     list: List<Game>,
     stores: List<Store>,
     onGameClick: (Game) -> Unit,
+    onStoreClick: (Store) -> Unit,
 ) {
     val state = rememberLazyGridState()
     val columns = when (LocalConfiguration.current.orientation) {
@@ -49,7 +50,7 @@ fun GamesNestedList(
         }
 
         item(span = { GridItemSpan(columns) }) {
-            StoresList(items = stores)
+            StoresList(items = stores, onItemClick = onStoreClick)
         }
 
         item(span = { GridItemSpan(columns) }) {
@@ -75,6 +76,7 @@ fun VideosGameListPreview() {
                 list = previewGames,
                 stores = previewStores,
                 onGameClick = {},
+                onStoreClick = {},
             )
         }
     }

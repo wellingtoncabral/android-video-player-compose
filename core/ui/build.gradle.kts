@@ -21,6 +21,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
 
     // Compose
-    implementation(libs.androidx.compose.ui)
+    api(libs.androidx.compose.foundation)
+    api(libs.androidx.compose.foundation.layout)
     api(libs.androidx.compose.ui.tooling.preview)
 }

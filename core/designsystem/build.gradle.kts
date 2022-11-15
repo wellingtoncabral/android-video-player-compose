@@ -17,11 +17,12 @@ dependencies {
     implementation(libs.androidx.core.ktx)
 
     // Compose
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    api(libs.androidx.compose.foundation)
+    api(libs.androidx.compose.foundation.layout)
+    api(libs.androidx.compose.material3)
+    api(libs.androidx.compose.ui.tooling.preview)
+    debugApi(libs.androidx.compose.ui.tooling)
+    debugApi(libs.androidx.compose.ui.test.manifest)
 
     // Accompanist
     implementation(libs.accompanist.systemuicontroller)

@@ -1,4 +1,3 @@
-import com.wcabral.videoplayercompose.addDebugImplementation
 import com.wcabral.videoplayercompose.addImplementation
 import com.wcabral.videoplayercompose.libs
 import org.gradle.api.Plugin
@@ -33,12 +32,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             // Android X
             addImplementation(libs.findLibrary("androidx.core.ktx").get())
             addImplementation(libs.findLibrary("androidx.lifecycle.viewmodel.ktx").get())
-
-            // Compose
-            addImplementation(libs.findLibrary("androidx.compose.ui").get())
-            addImplementation(libs.findLibrary("androidx.compose.material3").get())
-            addImplementation(libs.findLibrary("androidx.compose.ui.tooling.preview").get())
-            addDebugImplementation(libs.findLibrary("androidx.compose.ui.tooling").get())
 
             // Coroutines
             addImplementation(libs.findLibrary("kotlinx.coroutines.android").get())

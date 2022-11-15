@@ -1,6 +1,7 @@
 plugins {
     id("plugin.android.application")
     id("plugin.android.application.compose")
+    id("plugin.android.koin")
 }
 
 android {
@@ -53,7 +54,4 @@ dependencies {
     // Compose
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-
-    // Koin
-    implementation(libs.koin.android)
 }

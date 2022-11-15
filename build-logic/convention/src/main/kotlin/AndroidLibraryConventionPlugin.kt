@@ -8,7 +8,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             applyPlugins()
-            androidConfig()
+            applyAndroidConfig()
         }
     }
 
@@ -19,7 +19,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.androidConfig() {
+    private fun Project.applyAndroidConfig() {
         extensions.configure<LibraryExtension> {
             configureKotlinAndroid(this)
             defaultConfig.targetSdk = 32

@@ -8,7 +8,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             applyPlugins()
-            dependenciesConfig()
+            applyDependencies()
         }
     }
 
@@ -16,10 +16,12 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
         pluginManager.apply {
             apply("com.android.library")
             apply("org.jetbrains.kotlin.android")
+            apply("plugin.android.koin")
+            apply("plugin.android.koin.compose")
         }
     }
 
-    private fun Project.dependenciesConfig() {
+    private fun Project.applyDependencies() {
         dependencies {
             // Modules
             addImplementation(project(":core:model"))
@@ -35,10 +37,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
             // Coroutines
             addImplementation(libs.findLibrary("kotlinx.coroutines.android").get())
-
-            // Koin
-            addImplementation(libs.findLibrary("koin.android").get())
-            addImplementation(libs.findLibrary("koin.androidx.compose").get())
         }
     }
 }

@@ -4,6 +4,7 @@ import java.util.Properties
 
 plugins {
     id("plugin.android.library")
+    id("plugin.android.koin")
 }
 
 android {
@@ -13,12 +14,10 @@ android {
 }
 
 dependencies {
-
     implementation(project(":core:model"))
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp.logging.interceptor)
-    implementation(libs.koin.android)
 }
 
 fun getApiKey(): String {

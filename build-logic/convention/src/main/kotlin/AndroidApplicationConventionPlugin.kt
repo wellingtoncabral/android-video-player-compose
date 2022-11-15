@@ -12,8 +12,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             applyPlugins()
-            androidConfig()
-//            dependenciesConfig()
+            applyAndroidConfig()
+//            applyDependencies()
         }
     }
 
@@ -24,14 +24,14 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.androidConfig() {
+    private fun Project.applyAndroidConfig() {
         extensions.configure<ApplicationExtension> {
             configureKotlinAndroid(this)
             defaultConfig.targetSdk = 32
         }
     }
 
-    private fun Project.dependenciesConfig() {
+    private fun Project.applyDependencies() {
         dependencies {
             addImplementation(libs.findLibrary("androidx.core.ktx").get())
             addImplementation(libs.findLibrary("androidx.lifecycle.runtime.ktx").get())
